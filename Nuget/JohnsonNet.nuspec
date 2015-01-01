@@ -19,6 +19,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="JohnsonNet.dll" target="lib" />
+    <file src="..\bin\Release\JohnsonNet.dll" target="lib" />
   </files>
 </package>

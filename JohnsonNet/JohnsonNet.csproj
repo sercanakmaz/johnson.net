@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Nuget\lib\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -80,6 +80,7 @@
     <Compile Include="Serialization\TimeSpanConverter.cs" />
     <Compile Include="Serialization\UnixTimeStampConverter.cs" />
     <Compile Include="Serialization\XmlSerializer.cs" />
+    <Compile Include="Web\Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
