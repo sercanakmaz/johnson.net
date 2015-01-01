@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>JohnsonNet.WebPages</id>
+    <version>1.0.0.0</version>
+    <authors>srjohn</authors>
+    <owners>srjohn</owners>
+    <licenseUrl>https://github.com/srjohn/johnson.net</licenseUrl>
+    <projectUrl>https://github.com/srjohn/johnson.net</projectUrl>
+    <iconUrl>https://www.nuget.org/Content/Images/packageDefaultIcon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>.NET Helper Libraries</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2014 srjohn</copyright>
+    <tags></tags>
+    <dependencies>
+      <dependency id="JohnsonNet" version="1.0.1.1" />
+      <dependency id="Microsoft.AspNet.WebPages" version="1.0.20105.408" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\JohnsonNet.WebPages\bin\Release\JohnsonNet.WebPages.dll" target="lib\net40" />
+  </files>
+</package>

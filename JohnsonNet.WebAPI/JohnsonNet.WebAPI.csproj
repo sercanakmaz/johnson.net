@@ -46,7 +46,7 @@
     <Compile Include="EmptyOutput.cs" />
     <Compile Include="GenericOutput.cs" />
     <Compile Include="GenericRouteHandler.cs" />
-    <Compile Include="IAuthenticater.cs" />
+    <Compile Include="IApiAuthenticater.cs" />
     <Compile Include="IHttpHandlerBase.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="OutputStatus.cs" />

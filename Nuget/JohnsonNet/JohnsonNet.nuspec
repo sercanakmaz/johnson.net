@@ -2,12 +2,12 @@
 <package >
   <metadata>
     <id>JohnsonNet</id>
-    <version>1.0.1</version>
+    <version>1.0.1.1</version>
     <authors>srjohn</authors>
     <owners>srjohn</owners>
     <licenseUrl>https://github.com/srjohn/johnson.net</licenseUrl>
     <projectUrl>https://github.com/srjohn/johnson.net</projectUrl>
-    <iconUrl>https://github.com/srjohn/johnson.net</iconUrl>
+    <iconUrl>https://www.nuget.org/Content/Images/packageDefaultIcon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>.NET Helper Libraries</description>
     <releaseNotes></releaseNotes>
@@ -19,6 +19,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\bin\Release\JohnsonNet.dll" target="lib" />
+    <file src="..\..\JohnsonNet\bin\Release\JohnsonNet.dll" target="lib\net40" />
   </files>
 </package>

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace JohnsonNet.WebAPI
 {
-    public interface IAuthenticater
+    public interface IApiAuthenticater
     {
         object Authenticate(HttpContext context);
     }
