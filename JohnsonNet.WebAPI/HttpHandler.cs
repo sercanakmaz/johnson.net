@@ -55,10 +55,10 @@ namespace JohnsonNet.WebAPI
                     serializer = instance.Serializer;
 
                 var method = controllerType.GetMethods().FirstOrDefault(p => p.Name.Equals(actionName, StringComparison.CurrentCultureIgnoreCase) && p.IsPublic);
-               
+
                 if (method == null)
                     throw new ArgumentException("action");
-               
+
                 var authenticate = method.GetAttribute<AuthenticateAttribute>();
 
                 if (authenticate != null && instance.Authenticater == null)
@@ -69,19 +69,31 @@ namespace JohnsonNet.WebAPI
                 if (!method.ReturnType.GetInterfaces().Any(p => p == typeof(IOutput)))
                     throw new ArgumentException("Return object must be inherited IOutput");
 
-                Type authenticateReturnType = null;
-
-                if (instance.Authenticater != null && authenticate != null) 
-                {
-                    var authenticaterType = instance.Authenticater.GetType();
-                    var authenticateMethod = authenticaterType.GetMethod("Authenticate");
-
-                    authenticateReturnType = authenticateMethod.ReturnType;
-                }
+                if (methodParameters.Length > 2)
+                    throw new ArgumentException("You can't specify more than 2 parameter");
 
                 List<object> parameters = new List<object>();
+                ParameterInfo authenticateParameterInfo = null;
+                ParameterInfo inputParameterInfo = null;
 
-                var inputParameterInfo = methodParameters.FirstOrDefault(p => p.ParameterType != authenticateReturnType);
+                if (instance.Authenticater != null && authenticate != null)
+                {
+                    var authenticateResult = instance.Authenticater.Authenticate(context);
+
+                    if (authenticateResult == null)
+                        throw new AuthenticationException();
+
+                    authenticateParameterInfo = methodParameters.FirstOrDefault(p => p.ParameterType == authenticateResult.GetType());
+
+                    if (authenticateParameterInfo != null)
+                        parameters.Add(authenticateResult);
+                }
+
+                if (authenticateParameterInfo == null)
+                    inputParameterInfo = methodParameters.FirstOrDefault();
+                else
+                    inputParameterInfo = methodParameters.FirstOrDefault(p => p.ParameterType != authenticateParameterInfo.ParameterType);
+
                 if (inputParameterInfo != null)
                 {
                     object inputParameter = null;
@@ -97,20 +109,16 @@ namespace JohnsonNet.WebAPI
                     else if (!string.IsNullOrEmpty(requestBody))
                         inputParameter = serializer.Deserialize(requestBody, inputParameterInfo.ParameterType);
 
-                    parameters.Add(inputParameter);
-                }
+                    int inputParameterIndex = methodParameters.ToList().IndexOf(inputParameterInfo);
 
-                if (instance.Authenticater != null && authenticate != null)
-                {
-                    var authenticateResult = instance.Authenticater.Authenticate(context);
-
-                    if (authenticateResult == null)
-                        throw new AuthenticationException();
-
-                    var authenticateParameter = methodParameters.FirstOrDefault(p => p.ParameterType.BaseType == authenticateReturnType);
-
-                    if (authenticateParameter != null)
-                        parameters.Add(authenticateResult);
+                    if (inputParameterIndex == 0 && authenticateParameterInfo != null)
+                    {
+                        parameters.Insert(0, inputParameter);
+                    }
+                    else
+                    {
+                        parameters.Add(inputParameter);
+                    }
                 }
 
                 responseTyped = method.Invoke(instance, parameters.ToArray());
