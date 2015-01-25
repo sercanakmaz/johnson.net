@@ -16,62 +16,62 @@ namespace System.Web.WebPages
         {
             if (typeof(T).IsValueType)
             {
-                return Core.ConvertObject<T>(obj.PageData[key], def);
+                return JohnsonManager.Convert.To<T>(obj.PageData[key], def);
             }
-            return Core.Default((T)obj.PageData[key], def);
+            return JohnsonManager.Convert.Default((T)obj.PageData[key], def);
         }
         public static string PageData(this WebPage obj, string key, string def = null)
         {
-            return Core.ConvertObject<string>(obj.PageData[key], def);
+            return JohnsonManager.Convert.To<string>(obj.PageData[key], def);
         }
 
         public static T Session<T>(this WebPage obj, string key, T def = default(T))
         {
             if (typeof(T).IsValueType)
             {
-                return Core.ConvertObject<T>(obj.Session[key], def);
+                return JohnsonManager.Convert.To<T>(obj.Session[key], def);
             }
-            return Core.Default((T)obj.Session[key], def);
+            return JohnsonManager.Convert.Default((T)obj.Session[key], def);
         }
         public static string Session(this WebPage obj, string key, string def = null)
         {
-            return Core.ConvertObject<string>(obj.Session[key], def);
+            return JohnsonManager.Convert.To<string>(obj.Session[key], def);
         }
 
         public static T RequestValue<T>(this WebPage obj, string key, T def = default(T))
         {
-            return Core.ConvertObject<T>(obj.Context.Request[key], def);
+            return JohnsonManager.Convert.To<T>(obj.Context.Request[key], def);
         }
         public static T RequestValue<T>(this HttpContextBase context, string key, T def = default(T))
         {
-            return Core.ConvertObject<T>(context.Request[key], def);
+            return JohnsonManager.Convert.To<T>(context.Request[key], def);
         }
         public static T RequestValue<T>(this HttpContext context, string key, T def = default(T))
         {
-            return Core.ConvertObject<T>(context.Request[key], def);
+            return JohnsonManager.Convert.To<T>(context.Request[key], def);
         }
         public static string RequestValue(this System.Web.WebPages.WebPage obj, string key, string def = null)
         {
-            return Core.ConvertObject<string>(obj.Context.Request[key], def);
+            return JohnsonManager.Convert.To<string>(obj.Context.Request[key], def);
         }
 
         public static T GetRouteValue<T>(this System.Web.WebPages.WebPage obj, string key, T def = default(T))
         {
             RouteValueDictionary routes = obj.Context.Items["__Route"] as RouteValueDictionary;
             if (routes == null) return default(T);
-            return Core.ConvertObject<T>(routes[key], def);
+            return JohnsonManager.Convert.To<T>(routes[key], def);
         }
         public static T GetRouteValue<T>(this HttpContextBase context, string key, T def = default(T))
         {
             RouteValueDictionary routes = context.Items["__Route"] as RouteValueDictionary;
             if (routes == null) return default(T);
-            return Core.ConvertObject<T>(routes[key], def);
+            return JohnsonManager.Convert.To<T>(routes[key], def);
         }
         public static T GetRouteValue<T>(this HttpContext context, string key, T def = default(T))
         {
             RouteValueDictionary routes = context.Items["__Route"] as RouteValueDictionary;
             if (routes == null) return default(T);
-            return Core.ConvertObject<T>(routes[key], def);
+            return JohnsonManager.Convert.To<T>(routes[key], def);
         }
         public static string GetRouteValue(this HttpContextBase obj, string key, string def = null)
         {
@@ -108,7 +108,7 @@ namespace System.Web.WebPages
             var cookie = obj.Request.Cookies[key];
             if (cookie == null) return def;
 
-            return Core.ConvertObject<T>(cookie.Value, def);
+            return JohnsonManager.Convert.To<T>(cookie.Value, def);
         }
         public static string CookieValue(this System.Web.WebPages.WebPage obj, string key, string def = null)
         {

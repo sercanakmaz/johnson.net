@@ -1,50 +1,17 @@
-﻿using System;
+﻿using JohnsonNet.Config;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
-using JohnsonNet.Operation;
-using JohnsonNet.Config;
-using System.Configuration;
 using System.Web;
 
-namespace JohnsonNet
+namespace JohnsonNet.Operation
 {
-    public static class Provider
+    public class ConfigOperation
     {
-        private static LogOperation p_Log = null;
-        public static LogOperation Log
-        {
-            get
-            {
-                if (p_Log == null)
-                    p_Log = new LogOperation();
-
-                return p_Log;
-            }
-            set
-            {
-                p_Log = value;
-            }
-        }
-
-        private static MailOperation p_Mail = null;
-        public static MailOperation Mail
-        {
-            get
-            {
-                if (p_Mail == null)
-                    p_Mail = new MailOperation();
-
-                return p_Mail;
-            }
-            set
-            {
-                p_Mail = value;
-            }
-        }
-
-        static EnvironmentConfig p_EnvironmentConfig = null;
-        static EnvironmentConfig EnvironmentConfig
+        public EnvironmentConfig p_EnvironmentConfig = null;
+        public EnvironmentConfig EnvironmentConfig
         {
             get
             {
@@ -56,31 +23,31 @@ namespace JohnsonNet
             }
         }
 
-        private static IProvider p_Config = null;
-        public static IProvider Config
+        private IProvider p_Current = null;
+        public IProvider Current
         {
             get
             {
-                if (p_Config == null)
+                if (p_Current == null)
                 {
                     if (EnvironmentConfig == null)
                     {
-                        p_Config = new ConfigurationFileProvider(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                        p_Current = new ConfigurationFileProvider(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
                     }
                     else
                     {
-                        p_Config = GetConfigProvider(CurrentEnvironment);
+                        p_Current = GetConfigProvider(CurrentEnvironment);
                     }
                 }
-                return p_Config;
+                return p_Current;
             }
             set
             {
-                p_Config = value;
+                p_Current = value;
             }
         }
 
-        public static EnvironmentType CurrentEnvironment
+        public EnvironmentType CurrentEnvironment
         {
             get
             {
@@ -130,7 +97,18 @@ namespace JohnsonNet
             }
         }
 
-        public static IProvider GetConfigProvider(EnvironmentType type)
+        public Rule GetEnvironmentRule()
+        {
+            return GetEnvironmentRule(CurrentEnvironment);
+        }
+
+        public Rule GetEnvironmentRule(EnvironmentType type)
+        {
+            if (EnvironmentConfig == null) return null;
+            return EnvironmentConfig.Rules.OfType<Rule>().FirstOrDefault(p => p.Environment == type);
+        }
+
+        public IProvider GetConfigProvider(EnvironmentType type)
         {
             string configParam = null;
 
@@ -157,17 +135,15 @@ namespace JohnsonNet
 
             switch (EnvironmentConfig.Provider)
             {
-                case "JohnsonNet.Config.ConfigurationFileProvider":
-                    return new ConfigurationFileProvider(configParam);
-
                 default:
                     var providerType = Type.GetType(EnvironmentConfig.Provider, true);
-                    var provider = Activator.CreateInstance(providerType) as IProvider;
+                    var provider = Activator.CreateInstance(providerType, configParam) as IProvider;
 
                     if (provider == null) throw new NotImplementedException();
 
                     return provider;
             }
         }
+
     }
 }

@@ -1,26 +1,24 @@
-﻿using JohnsonNet.Config;
+﻿using JohnsonNet.Data;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 
-namespace JohnsonNet.Data
+namespace JohnsonNet.Operation
 {
-    public class BaseDataOperation
+    public class DataOperation
     {
         public ConnectionStringSettings CurrentConnectionString;
 
-        public BaseDataOperation()
+        public DataOperation()
             : this(null)
         {
         }
-        public BaseDataOperation(ConnectionStringSettings connectionString)
+        public DataOperation(ConnectionStringSettings connectionString)
         {
             if (connectionString == null)
-                connectionString = Provider.Config.GetConnectionString("LocalSqlServer");
+                connectionString = JohnsonManager.Config.Current.GetConnectionString("LocalSqlServer");
 
             this.CurrentConnectionString = connectionString;
 

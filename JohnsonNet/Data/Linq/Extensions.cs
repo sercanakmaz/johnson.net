@@ -1,14 +1,12 @@
-﻿using System;
+﻿using JohnsonNet.Operation;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Xml.Linq;
-using JohnsonNet.Data;
 
 namespace JohnsonNet.Data.Linq
 {
@@ -140,7 +138,7 @@ namespace JohnsonNet.Data.Linq
 
                 if (c == null) continue;
 
-                string columnName = Core.Default(c.Name, p.Name).Trim()
+                string columnName = JohnsonManager.Convert.Default(c.Name, p.Name).Trim()
                     , dbType = ReplaceDbType(c.DbType).Trim();
 
                 if (c.IsPrimaryKey) primaryKeyColumns.Add(columnName, dbType);
@@ -170,13 +168,13 @@ namespace JohnsonNet.Data.Linq
 
         public static List<T> ExecuteProcedure<T>(this DataContext obj, string procName, ParamDictionary parameters = null)
         {
-            var o = new BaseDataOperation(obj.Connection.ToConnectionStringSettings());
+            var o = new DataOperation(obj.Connection.ToConnectionStringSettings());
             return o.Execute<T>(procName, parameters);
         }
 
         public static void ReAttach<T>(this Table<T> obj, T entity, bool asModified = false) where T : class
         {
-            obj.Attach(Core.ConvertClass<T, T>(entity), asModified);
+            obj.Attach(JohnsonManager.Reflection.CloneClass<T, T>(entity), asModified);
         }
 
         public static ParamDictionary GetParams<T>(this Table<T> obj, T entity) where T : class

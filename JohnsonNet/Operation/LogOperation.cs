@@ -71,7 +71,7 @@ namespace JohnsonNet.Operation
             DateTime date = DateTime.Now;
             try
             {
-                var p = Provider.Config;
+                var p = JohnsonManager.Config.Current;
                 string logSmtpUser = p.GetSetting("LogSmtpUser", p.GetSetting<string>("SmtpUser"))
                      , logSmtpPass = p.GetSetting("LogSmtpPass", p.GetSetting<string>("SmtpPass"))
                      , logSmtpPort = p.GetSetting("LogSmtpPort", p.GetSetting<string>("SmtpPort"))
@@ -147,7 +147,7 @@ namespace JohnsonNet.Operation
             catch
             {
                 string projectName = null;
-                try { projectName = Provider.Config.GetSetting<string>("LogProjectName"); }
+                try { projectName = JohnsonManager.Config.Current.GetSetting<string>("LogProjectName"); }
                 catch { projectName = "JohnsonNetLog"; }
 
                 EventLog(date, exception, extra, projectName);

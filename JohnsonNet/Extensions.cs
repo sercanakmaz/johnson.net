@@ -83,7 +83,7 @@ namespace System
         public static T ToNumeric<T>(this string obj)
         {
             if (string.IsNullOrEmpty(obj)) return default(T);
-            return Core.ConvertObject<T>(Regex.Replace(obj, "[^.0-9]", ""));
+            return JohnsonManager.Convert.To<T>(Regex.Replace(obj, "[^.0-9]", ""));
         }
         /// <summary>
         /// string length'ten uzun ise kesilip sonuna addToLast eklenir.
@@ -119,7 +119,7 @@ namespace System
 
             foreach (var listPaged in list.Paged(pageSize))
             {
-                var thread = Core.ExecuteAsync((listPagedAsync) =>
+                var thread = JohnsonManager.MultiThread.ExecuteAsync((listPagedAsync) =>
                 {
                     foreach (var item in listPagedAsync)
                     {

@@ -14,7 +14,7 @@ namespace JohnsonNet.WebAPI
     {
         public void ProcessRequest(HttpContext context)
         {
-            ISerializer serializer = new JsonSerializer();
+            ISerializer serializer = JohnsonManager.Json;
             ApiController instance = null;
 
             object responseTyped = null;
@@ -105,7 +105,7 @@ namespace JohnsonNet.WebAPI
                     }*/
 
                     if (!string.IsNullOrEmpty(permalinkParameter))
-                        inputParameter = Core.ConvertObject(inputParameterInfo.ParameterType, (object)permalinkParameter);
+                        inputParameter = JohnsonManager.Convert.To(inputParameterInfo.ParameterType, (object)permalinkParameter);
                     else if (!string.IsNullOrEmpty(requestBody))
                         inputParameter = serializer.Deserialize(requestBody, inputParameterInfo.ParameterType);
 

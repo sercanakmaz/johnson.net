@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
-namespace JohnsonNet.IO
+namespace JohnsonNet.Operation
 {
-    public static class Core
+    public class IOOperation
     {
         private static readonly List<string> units = new List<string>(5) { "B", "KB", "MB", "GB", "TB" }; // Not going further. Anything beyond MB is probably overkill anyway.
         private static string numberPattern = " ({0})";
 
-        public static string ToFriendlySizeString(this long bytes)
+        public string ToFriendlySizeString(long bytes)
         {
             var somethingMoreFriendly = TryForTheNextUnit(bytes, units[0]);
             var roundingPlaces = units[0] == somethingMoreFriendly.Item2 ? 0 : units.IndexOf(somethingMoreFriendly.Item2) - 1;
             return string.Format("{0} {1}", Math.Round(somethingMoreFriendly.Item1, roundingPlaces), somethingMoreFriendly.Item2);
         }
 
-        private static Tuple<double, string> TryForTheNextUnit(double size, string unit)
+        private Tuple<double, string> TryForTheNextUnit(double size, string unit)
         {
             var indexOfUnit = units.IndexOf(unit);
 
@@ -32,7 +33,7 @@ namespace JohnsonNet.IO
             return new Tuple<double, string>(size, unit);
         }
 
-        public static string NextAvailableFilename(string path)
+        public string NextAvailableFilename(string path)
         {
             // Short-cut if already available
             if (!File.Exists(path))
@@ -46,7 +47,7 @@ namespace JohnsonNet.IO
             return GetNextFilename(path + numberPattern);
         }
 
-        private static string GetNextFilename(string pattern)
+        private string GetNextFilename(string pattern)
         {
             string tmp = string.Format(pattern, 1);
             if (tmp == pattern)
@@ -75,12 +76,21 @@ namespace JohnsonNet.IO
             return string.Format(pattern, max);
         }
 
-        public static string ToFileName(string path)
+        public string ToFileName(string path)
         {
             foreach (string c in Path.GetInvalidFileNameChars().Select(p => p.ToString()))
                 path = path.Replace(c, string.Empty);
 
             return path;
+        }
+
+        public static string GetResourceStream(Assembly assembly, string resourceName)
+        {
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                return reader.ReadToEnd();
+            }
         }
     }
 }

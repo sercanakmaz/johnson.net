@@ -13,7 +13,7 @@ namespace JohnsonNet.Serialization
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
         {
-            var converted = Core.ConvertObject<long?>(reader.Value);
+            var converted = JohnsonManager.Convert.To<long?>(reader.Value);
             if (!converted.HasValue)
                 return null;
 

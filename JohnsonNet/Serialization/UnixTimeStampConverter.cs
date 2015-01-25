@@ -18,7 +18,7 @@ namespace JohnsonNet.Serialization
         public static readonly DateTime UnixOrigin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
         {
-            var converted = Core.ConvertObject<long?>(reader.Value);
+            var converted = JohnsonManager.Convert.To<long?>(reader.Value);
             if (!converted.HasValue)
                 return null;
 
@@ -29,7 +29,7 @@ namespace JohnsonNet.Serialization
         }
         public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
         {
-            var converted = Core.ConvertObject<DateTime?>(value);
+            var converted = JohnsonManager.Convert.To<DateTime?>(value);
 
             if (!converted.HasValue)
                 writer.WriteValue(converted);
