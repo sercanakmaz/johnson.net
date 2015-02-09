@@ -79,6 +79,7 @@
     <Compile Include="Serialization\LowercaseContractResolver.cs" />
     <Compile Include="Serialization\TimeSpanConverter.cs" />
     <Compile Include="Serialization\UnixTimeStampConverter.cs" />
+    <Compile Include="Serialization\AbsoluteUriConverter.cs" />
     <Compile Include="Serialization\XmlSerializer.cs" />
     <Compile Include="Web\Extensions.cs" />
   </ItemGroup>

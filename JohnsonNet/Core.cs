@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Xml.Linq;
 
 namespace JohnsonNet
 {
@@ -29,6 +30,14 @@ namespace JohnsonNet
                     else if (currentType.IsEnum)
                     {
                         return Enum.Parse(currentType, val.ToString());
+                    }
+                    else if (currentType == typeof(XElement))
+                    {
+                        return XElement.Parse(val.ToString());
+                    }
+                    else if (currentType == typeof(Uri))
+                    {
+                        return new Uri(val.ToString(), UriKind.RelativeOrAbsolute);
                     }
                     return Convert.ChangeType(val, currentType, info);
                 }
