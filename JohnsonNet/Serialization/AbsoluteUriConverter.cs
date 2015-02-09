@@ -18,34 +18,32 @@ namespace JohnsonNet.Serialization
             string val = Core.ConvertObject<string>(reader.Value);
 
             if (string.IsNullOrEmpty(val)) return null;
-
+            
             Uri result = null;
             if (!Uri.TryCreate(val, UriKind.RelativeOrAbsolute, out result))
                 return null;
 
             if (result == null) return null;
 
-            return new Uri(result.PathAndQuery, UriKind.RelativeOrAbsolute);
+            return result;
         }
 
         public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
         {
-            Uri result = value as Uri;
+            Uri typedValue = value as Uri;
+            if (typedValue == null) return;
+
             string baseUri = Provider.Config.GetSetting("AbsoluteUriConverter-BaseUri");
 
-            if (result != null && !string.IsNullOrEmpty(baseUri))
+            // IsRelativeUri
+            if (Uri.IsWellFormedUriString(typedValue.OriginalString, UriKind.Relative) && !string.IsNullOrEmpty(baseUri))
             {
-                if (Uri.IsWellFormedUriString(result.OriginalString, UriKind.Absolute))
-                {
-                    result = new Uri(new Uri(baseUri), result.PathAndQuery);
-                }
-                else
-                {
-                    result = new Uri(new Uri(baseUri), result.OriginalString);
-                }
+                Uri baseUriTyped = new Uri(baseUri);
+                writer.WriteValue(new Uri(baseUriTyped, typedValue.OriginalString));
+                return;
             }
 
-            writer.WriteValue(result.OriginalString);
+            writer.WriteValue(typedValue.OriginalString);
         }
     }
 }
