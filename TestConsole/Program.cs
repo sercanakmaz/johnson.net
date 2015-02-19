@@ -11,8 +11,6 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            var result = JohnsonManager.Data.Execute<MyClass>("Member.Get", new JohnsonNet.Data.ParamDictionary { { "ID", 730 }, { "IsActive", null } });
-            Console.WriteLine(result);
         }
     }
     class MyClass
