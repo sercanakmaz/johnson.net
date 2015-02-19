@@ -135,6 +135,8 @@ namespace JohnsonNet
                         ConvertEnumToString = true,
                         ToLowerCase = true
                     };
+
+                    p_Json.Settings.Converters.Add(new AbsoluteUriConverter());
                 }
                 return p_Json;
             }

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>JohnsonNet</id>
-    <version>1.0.1.7</version>
+    <version>1.0.2.0</version>
     <authors>srjohn</authors>
     <owners>srjohn</owners>
     <licenseUrl>https://github.com/srjohn/johnson.net</licenseUrl>
@@ -15,7 +15,6 @@
     <tags></tags>
     <dependencies>
       <dependency id="Newtonsoft.Json" version="6.0.7" />
-      <dependency id="RestSharp" version="105.0.1" />
     </dependencies>
   </metadata>
   <files>

@@ -75,7 +75,7 @@ namespace JohnsonNet.Operation
                      , logSmtpPass = p.GetSetting("LogSmtpPass", p.GetSetting<string>("SmtpPass"))
                      , logSmtpPort = p.GetSetting("LogSmtpPort", p.GetSetting<string>("SmtpPort"))
                      , logSmtpServer = p.GetSetting("LogSmtpServer", p.GetSetting<string>("SmtpServer"))
-                     , logSmtpEnableSSL = p.GetSetting("LogEnableSSL", p.GetSetting<string>("SmtpEnableSSL"))
+                     , logSmtpEnableSSL = p.GetSetting("LogSmtpEnableSSL", p.GetSetting<string>("SmtpEnableSSL"))
                      , logSmtpLogUsers = p.GetSetting<string>("LogEmailUsers")
                      , logProjectName = GetProjectName(p.GetSetting<string>("LogProjectName"))
                      , logType = p.GetSetting<string>("LogType", string.Empty);

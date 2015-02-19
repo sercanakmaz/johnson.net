@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JohnsonNet.WebPages", "John
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JohnsonNet.WebAPI", "JohnsonNet.WebAPI\JohnsonNet.WebAPI.csproj", "{ADCD22C7-8BEB-450F-8DF1-E65F79186B41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{6AF57635-3F11-4C89-8AE8-0A47A240E7C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{ADCD22C7-8BEB-450F-8DF1-E65F79186B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADCD22C7-8BEB-450F-8DF1-E65F79186B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADCD22C7-8BEB-450F-8DF1-E65F79186B41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AF57635-3F11-4C89-8AE8-0A47A240E7C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AF57635-3F11-4C89-8AE8-0A47A240E7C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AF57635-3F11-4C89-8AE8-0A47A240E7C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AF57635-3F11-4C89-8AE8-0A47A240E7C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

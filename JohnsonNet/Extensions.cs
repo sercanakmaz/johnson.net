@@ -141,10 +141,10 @@ namespace System
                 if (input.HasFlag(value))
                     yield return value;
         }
-        public static T GetAttribute<T>(this MethodBase obj) where T : class
+        public static T GetAttribute<T>(this MemberInfo obj) where T : class
         {
             return obj.GetCustomAttributes(true).FirstOrDefault(p => p is T) as T;
-        } 
+        }
         #endregion
     }
 }

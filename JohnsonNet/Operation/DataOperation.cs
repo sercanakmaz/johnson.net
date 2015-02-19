@@ -56,12 +56,7 @@ namespace JohnsonNet.Operation
                 return result;
             }
         }
-        /// <summary>
-        /// Bu metodu kullandıktan sonra connection'i close etmelisiniz!
-        /// </summary>
-        /// <param name="proc"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+       
         public virtual void ExecuteReader(string proc, ParamDictionary parameters, Action<IDataReader> use)
         {
             using (var conn = CurrentConnectionString.ToIDbConnection())

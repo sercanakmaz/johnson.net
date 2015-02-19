@@ -11,6 +11,29 @@ namespace JohnsonNet.Data
 {
     public static class Extensions
     {
+        public static ParamDictionary ToParamDictionary(this object obj)
+        {
+            if (obj == null) return null;
+
+            var itemType = obj.GetType();
+            var properties = itemType.GetProperties();
+            var parameters = new ParamDictionary();
+
+            foreach (var prp in properties)
+            {
+                if (prp.GetAttribute<IgnoreAttribute>() != null)
+                    continue;
+
+                string fieldName = null;
+                fieldName = (prp.GetAttribute<FieldMapAttribute>() ?? new FieldMapAttribute()).FieldName;
+
+                if (string.IsNullOrEmpty(fieldName)) fieldName = prp.Name;
+
+                parameters.Add(fieldName, prp.GetValue(obj, null));
+            }
+
+            return parameters;
+        }
         public static List<T> ToList<T>(this IDataReader reader)
         {
             var result = new List<T>();

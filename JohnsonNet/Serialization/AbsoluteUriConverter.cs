@@ -15,7 +15,7 @@ namespace JohnsonNet.Serialization
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
         {
-            string val = Core.ConvertObject<string>(reader.Value);
+            string val = JohnsonManager.Convert.To<string>(reader.Value);
 
             if (string.IsNullOrEmpty(val)) return null;
             
@@ -33,7 +33,7 @@ namespace JohnsonNet.Serialization
             Uri typedValue = value as Uri;
             if (typedValue == null) return;
 
-            string baseUri = Provider.Config.GetSetting("AbsoluteUriConverter-BaseUri");
+            string baseUri = JohnsonManager.Config.Current.GetSetting("AbsoluteUriConverter-BaseUri");
 
             // IsRelativeUri
             if (Uri.IsWellFormedUriString(typedValue.OriginalString, UriKind.Relative) && !string.IsNullOrEmpty(baseUri))
