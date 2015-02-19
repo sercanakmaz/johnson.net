@@ -1,6 +1,5 @@
 ﻿using JohnsonNet.Config;
 using JohnsonNet.Serialization;
-using RestSharp;
 using System;
 using System.Net.Mail;
 using System.Text;
@@ -71,7 +70,7 @@ namespace JohnsonNet.Operation
             DateTime date = DateTime.Now;
             try
             {
-                var p = Provider.Config;
+                var p = JohnsonManager.Config.Current;
                 string logSmtpUser = p.GetSetting("LogSmtpUser", p.GetSetting<string>("SmtpUser"))
                      , logSmtpPass = p.GetSetting("LogSmtpPass", p.GetSetting<string>("SmtpPass"))
                      , logSmtpPort = p.GetSetting("LogSmtpPort", p.GetSetting<string>("SmtpPort"))
@@ -83,7 +82,6 @@ namespace JohnsonNet.Operation
 
                 bool isMailLogType = logType.Contains("SendMail");
                 bool isDatabaseLogType = logType.Contains("SaveDatabase") && SaveDatabaseAction != null;
-                bool isApiLogType = logType.Contains("SaveAPI") ? true : !(isMailLogType || isDatabaseLogType);
 
                 extra = (string.IsNullOrEmpty(extra) ? null : args != null ? string.Format(extra, args) : extra);
 
@@ -122,32 +120,13 @@ namespace JohnsonNet.Operation
                 {
                     SaveDatabaseAction(date, exception, extra, logProjectName);
                 }
-                if (isApiLogType)
-                {
-                    string LogAPIAddress = null;
-                    var o = new
-                    {
-                        date = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.ffff"),
-                        exception = exception,
-                        extra = extra,
-                        projectName = logProjectName
-                    };
-
-                    var client = new RestClient(LogAPIAddress);
-                    var request = new RestRequest("/logs/log/", Method.POST) { RequestFormat = DataFormat.Json }
-                        .AddBody(o);
-
-                    var response = client.Execute<ElasticSearchResult>(request);
-
-                    if (response.Data == null ? true : !response.Data.Created) throw new Exception();
-                }
 
                 return true;
             }
             catch
             {
                 string projectName = null;
-                try { projectName = Provider.Config.GetSetting<string>("LogProjectName"); }
+                try { projectName = JohnsonManager.Config.Current.GetSetting<string>("LogProjectName"); }
                 catch { projectName = "JohnsonNetLog"; }
 
                 EventLog(date, exception, extra, projectName);

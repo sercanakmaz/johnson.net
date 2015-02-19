@@ -18,7 +18,7 @@ namespace JohnsonNet.Config
     public class ConfigurationFileProvider : IProvider
     {
         internal Configuration configuration = null;
-        internal ConfigurationFileProvider(string configSource)
+        public ConfigurationFileProvider(string configSource)
         {
             if (!Path.IsPathRooted(configSource))
             {
@@ -41,13 +41,13 @@ namespace JohnsonNet.Config
         {
             var s = configuration.AppSettings.Settings[key];
             if (s == null) return def;
-            return Core.ConvertObject<T>(s.Value, def);
+            return JohnsonManager.Convert.To<T>(s.Value, def);
         }
         public string GetSetting(string key, string def = null)
         {
             var s = configuration.AppSettings.Settings[key];
             if (s == null) return def;
-            return Core.ConvertObject(s.Value, def);
+            return JohnsonManager.Convert.To(s.Value, def);
         }
         public T GetCommunicationObject<T>()
         {

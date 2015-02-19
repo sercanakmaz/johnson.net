@@ -33,17 +33,17 @@ namespace JohnsonNet.Operation
             , bool enableSSL = false
             , List<Attachment> attachments = null)
         {
-            var f = Provider.Config;
-            smtpServer = Core.Default(smtpServer, Core.Default(SmtpServer, f.GetSetting("SmtpServer")));
-            smtpUser = Core.Default(smtpUser, Core.Default(SmtpUser, f.GetSetting("SmtpUser")));
-            smtpPass = Core.Default(smtpPass, Core.Default(SmtpPass, f.GetSetting("SmtpPass")));
-            smtpPort = Core.Default(smtpPort, Core.Default(SmtpPort, f.GetSetting<int>("SmtpPort")));
-            enableSSL = Core.Default(enableSSL, Core.Default(EnableSSL, f.GetSetting<bool>("SmtpEnableSSL")));
+            var f = JohnsonManager.Config.Current;
+            smtpServer = JohnsonManager.Convert.Default(smtpServer, JohnsonManager.Convert.Default(SmtpServer, f.GetSetting("SmtpServer")));
+            smtpUser = JohnsonManager.Convert.Default(smtpUser, JohnsonManager.Convert.Default(SmtpUser, f.GetSetting("SmtpUser")));
+            smtpPass = JohnsonManager.Convert.Default(smtpPass, JohnsonManager.Convert.Default(SmtpPass, f.GetSetting("SmtpPass")));
+            smtpPort = JohnsonManager.Convert.Default(smtpPort, JohnsonManager.Convert.Default(SmtpPort, f.GetSetting<int>("SmtpPort")));
+            enableSSL = JohnsonManager.Convert.Default(enableSSL, JohnsonManager.Convert.Default(EnableSSL, f.GetSetting<bool>("SmtpEnableSSL")));
 
-            fromMail = Core.Default(Core.Default(fromMail, f.GetSetting("SmtpFromMail")), smtpUser);
-            fromDisplayName = Core.Default(fromDisplayName, f.GetSetting("SmtpUserDisplayName"));
-            replyToMail = Core.Default(replyToMail, f.GetSetting("SmtpReplyToMail"));
-            replyToDisplayName = Core.Default(replyToDisplayName, f.GetSetting("SmtpReplyToDisplayName"));
+            fromMail = JohnsonManager.Convert.Default(JohnsonManager.Convert.Default(fromMail, f.GetSetting("SmtpFromMail")), smtpUser);
+            fromDisplayName = JohnsonManager.Convert.Default(fromDisplayName, f.GetSetting("SmtpUserDisplayName"));
+            replyToMail = JohnsonManager.Convert.Default(replyToMail, f.GetSetting("SmtpReplyToMail"));
+            replyToDisplayName = JohnsonManager.Convert.Default(replyToDisplayName, f.GetSetting("SmtpReplyToDisplayName"));
 
             using (SmtpClient client = new SmtpClient
             {

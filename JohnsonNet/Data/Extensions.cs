@@ -24,7 +24,7 @@ namespace JohnsonNet.Data
                 if (itemType.IsPrimitive
                     || itemType == typeof(System.String))
                 {
-                    item = Core.ConvertObject<T>(reader.GetValue(0));
+                    item = JohnsonManager.Convert.To<T>(reader.GetValue(0));
                 }
                 else
                 {
@@ -40,7 +40,7 @@ namespace JohnsonNet.Data
 
                         if (fieldOrdinal >= 0)
                         {
-                            prp.SetValue(item, Core.ConvertObject(prp.PropertyType, reader.GetValue(fieldOrdinal)), null);
+                            prp.SetValue(item, JohnsonManager.Convert.To(prp.PropertyType, reader.GetValue(fieldOrdinal)), null);
                         }
                     }
                 }

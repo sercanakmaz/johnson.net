@@ -33,9 +33,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -58,8 +55,11 @@
     <Compile Include="Config\Elements\RuleType.cs" />
     <Compile Include="Config\Providers\ConfigurationFileProvider.cs" />
     <Compile Include="Config\Providers\IProvider.cs" />
-    <Compile Include="Core.cs" />
-    <Compile Include="Data\BaseDataOperation.cs" />
+    <Compile Include="Operation\ConfigOperation.cs" />
+    <Compile Include="Operation\ConvertOperation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Operation\DataOperation.cs" />
     <Compile Include="Data\Extensions.cs" />
     <Compile Include="Data\FieldMapAttribute.cs" />
     <Compile Include="Data\Linq\Extensions.cs" />
@@ -68,12 +68,13 @@
     <Compile Include="Drawing\Captcha.cs" />
     <Compile Include="Drawing\Extensions.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="IO\Core.cs" />
+    <Compile Include="Operation\IOOperation.cs" />
     <Compile Include="Operation\LogOperation.cs" />
     <Compile Include="Operation\MailOperation.cs" />
+    <Compile Include="Operation\MultiThreadOperation.cs" />
+    <Compile Include="Operation\ReflectionOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Provider.cs" />
-    <Compile Include="Serialization\Factory.cs" />
+    <Compile Include="JohnsonManager.cs" />
     <Compile Include="Serialization\ISerializer.cs" />
     <Compile Include="Serialization\JsonSerializer.cs" />
     <Compile Include="Serialization\LowercaseContractResolver.cs" />

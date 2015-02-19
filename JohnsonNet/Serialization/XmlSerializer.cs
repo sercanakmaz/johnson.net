@@ -15,7 +15,7 @@ namespace JohnsonNet.Serialization
             Type type = input.GetType();
 
             return new XElement("Class",
-                           new XElement((Core.IsAnonymousType(type) ? "AnonymousType" : type.Name),
+                           new XElement((JohnsonManager.Reflection.IsAnonymousType(type) ? "AnonymousType" : type.Name),
                                from pi in type.GetProperties()
                                where !pi.GetIndexParameters().Any()
                                let value = pi.GetValue(input, null)

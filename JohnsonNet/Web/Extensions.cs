@@ -15,7 +15,7 @@ namespace System.Web
         {
             String ParamValue = P.Page.Request[ParamName];
 
-            return Core.ConvertObject<T>(ParamValue, DefaultValue);
+            return JohnsonManager.Convert.To<T>(ParamValue, DefaultValue);
         }
         public static T RequestValue<T>(this System.Web.UI.TemplateControl P, String ParamName)
         {
@@ -44,7 +44,7 @@ namespace System.Web
         {
             String ParamValue = P.Page.Request.QueryString[ParamName];
 
-            return Core.ConvertObject<T>(ParamValue, DefaultValue);
+            return JohnsonManager.Convert.To<T>(ParamValue, DefaultValue);
         }
         public static T QueryStringValue<T>(this System.Web.UI.TemplateControl P, String ParamName)
         {
@@ -73,7 +73,7 @@ namespace System.Web
         {
             String ParamValue = P.Page.Request.Form[ParamName] as String;
 
-            return Core.ConvertObject<T>(ParamValue, DefaultValue);
+            return JohnsonManager.Convert.To<T>(ParamValue, DefaultValue);
         }
         public static T FormValue<T>(this System.Web.UI.TemplateControl P, String ParamName)
         {
@@ -102,7 +102,7 @@ namespace System.Web
         {
             String ParamValue = P.Page.RouteData.Values[ParamName] as String;
 
-            return Core.ConvertObject<T>(ParamValue, DefaultValue);
+            return JohnsonManager.Convert.To<T>(ParamValue, DefaultValue);
         }
         public static T RouteDataValue<T>(this System.Web.UI.TemplateControl P, String ParamName)
         {
@@ -133,7 +133,7 @@ namespace System.Web
             var cookie = obj.Request.Cookies[key];
             if (cookie == null) return def;
 
-            return Core.ConvertObject<T>(cookie.Value, def);
+            return JohnsonManager.Convert.To<T>(cookie.Value, def);
         }
         public static string CookieValue(this HttpContext obj, string key, string def = null)
         {
