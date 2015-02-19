@@ -127,12 +127,15 @@ namespace JohnsonNet
         {
             get
             {
-                if (p_Json == null) p_Json = new JsonSerializer
+                if (p_Json == null)
                 {
-                    ConvertDateToUnixTimeStamp = true,
-                    ConvertEnumToString = true,
-                    ToLowerCase = true
-                };
+                    p_Json = new JsonSerializer
+                    {
+                        ConvertDateToUnixTimeStamp = true,
+                        ConvertEnumToString = true,
+                        ToLowerCase = true
+                    };
+                }
                 return p_Json;
             }
         }
@@ -161,7 +164,7 @@ namespace JohnsonNet
                 return p_Config;
             }
         }
-     
+
         #endregion
     }
 }

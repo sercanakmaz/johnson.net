@@ -78,7 +78,8 @@ namespace JohnsonNet.Operation
                     {
                         foreach (var item in parameters)
                         {
-                            command.Parameters.Add(new SqlParameter(item.Key, item.Value));
+                            var param = new SqlParameter(item.Key, item.Value != null ? item.Value : DBNull.Value);
+                            command.Parameters.Add(param);
                         }
                     }
 

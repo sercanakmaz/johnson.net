@@ -18,7 +18,7 @@ namespace JohnsonNet.Config
     public class ConfigurationFileProvider : IProvider
     {
         internal Configuration configuration = null;
-        internal ConfigurationFileProvider(string configSource)
+        public ConfigurationFileProvider(string configSource)
         {
             if (!Path.IsPathRooted(configSource))
             {
