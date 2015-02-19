@@ -57,20 +57,23 @@ namespace JohnsonNet.Operation
         {
             if (type.IsValueType)
             {
-                return Activator.CreateInstance(type);
+                if (defaultValue == null)
+                {
+                    return Activator.CreateInstance(type);
+                }
+
+                return defaultValue;
             }
 
-            if (value == null) return null;
+            if (value == null) return defaultValue;
 
             if (type == typeof(string))
             {
                 if (string.IsNullOrEmpty(value.ToString()))
                     return defaultValue;
-
-                else return value;
             }
 
-            return null;
+            return value;
         }
 
         public T Default<T>(T val, T def)
