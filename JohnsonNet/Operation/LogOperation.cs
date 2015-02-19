@@ -1,6 +1,5 @@
 ﻿using JohnsonNet.Config;
 using JohnsonNet.Serialization;
-using RestSharp;
 using System;
 using System.Net.Mail;
 using System.Text;
@@ -83,7 +82,6 @@ namespace JohnsonNet.Operation
 
                 bool isMailLogType = logType.Contains("SendMail");
                 bool isDatabaseLogType = logType.Contains("SaveDatabase") && SaveDatabaseAction != null;
-                bool isApiLogType = logType.Contains("SaveAPI") ? true : !(isMailLogType || isDatabaseLogType);
 
                 extra = (string.IsNullOrEmpty(extra) ? null : args != null ? string.Format(extra, args) : extra);
 
@@ -121,25 +119,6 @@ namespace JohnsonNet.Operation
                 if (isDatabaseLogType)
                 {
                     SaveDatabaseAction(date, exception, extra, logProjectName);
-                }
-                if (isApiLogType)
-                {
-                    string LogAPIAddress = null;
-                    var o = new
-                    {
-                        date = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.ffff"),
-                        exception = exception,
-                        extra = extra,
-                        projectName = logProjectName
-                    };
-
-                    var client = new RestClient(LogAPIAddress);
-                    var request = new RestRequest("/logs/log/", Method.POST) { RequestFormat = DataFormat.Json }
-                        .AddBody(o);
-
-                    var response = client.Execute<ElasticSearchResult>(request);
-
-                    if (response.Data == null ? true : !response.Data.Created) throw new Exception();
                 }
 
                 return true;
