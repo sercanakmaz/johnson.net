@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>JohnsonNet.WebPages</id>
-    <version>1.0.0.0</version>
+    <version>1.0.0.5</version>
     <authors>srjohn</authors>
     <owners>srjohn</owners>
     <licenseUrl>https://github.com/srjohn/johnson.net</licenseUrl>
@@ -14,7 +14,7 @@
     <copyright>Copyright 2014 srjohn</copyright>
     <tags></tags>
     <dependencies>
-      <dependency id="JohnsonNet" version="1.0.1.1" />
+      <dependency id="JohnsonNet" version="1.0.1.7" />
       <dependency id="Microsoft.AspNet.WebPages" version="1.0.20105.408" />
     </dependencies>
   </metadata>

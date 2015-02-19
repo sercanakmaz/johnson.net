@@ -56,6 +56,12 @@ namespace JohnsonNet.Serialization
             }
         }
 
+        public JsonSerializerSettings Settings
+        {
+            get { return settings; }
+            set { settings = value; }
+        }
+
         public JsonSerializer()
         {
             settings = new JsonSerializerSettings
