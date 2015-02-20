@@ -65,7 +65,7 @@ namespace JohnsonNet.Operation
                 return defaultValue;
             }
 
-            if (value == null) return defaultValue;
+            if (value == null || value == DBNull.Value) return defaultValue;
 
             if (type == typeof(string))
             {
