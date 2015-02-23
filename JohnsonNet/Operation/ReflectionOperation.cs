@@ -59,6 +59,7 @@ namespace JohnsonNet.Operation
             return result;
         }
         #endregion
+
         #region Property
         public bool IsPropertyExist(object obj, string name)
         {
@@ -99,6 +100,36 @@ namespace JohnsonNet.Operation
         public object GetPropertyValue(object obj, string name)
         {
             return GetPropertyValue<object>(obj, name);
+        }
+
+        public IEnumerable<PropertyInfo> GetPropertiesWithoutHidings(Type targetType)
+        {
+            List<PropertyInfo> targetMembers = new List<PropertyInfo>(targetType.GetProperties());
+            List<PropertyInfo> distinctMembers = new List<PropertyInfo>(targetMembers.Count);
+
+            foreach (var groupedMember in targetMembers.GroupBy(m => m.Name))
+            {
+                int count = groupedMember.Count();
+                IList<PropertyInfo> members = groupedMember.ToList();
+
+                if (count == 1)
+                {
+                    distinctMembers.Add(members.First());
+                }
+                else
+                {
+                    IList<PropertyInfo> resolvedMembers = new List<PropertyInfo>();
+                    foreach (PropertyInfo memberInfo in members)
+                    {
+                        if (resolvedMembers.Count == 0)
+                            resolvedMembers.Add(memberInfo);
+                    }
+
+                    distinctMembers.AddRange(resolvedMembers);
+                }
+            }
+
+            return distinctMembers;
         }
         #endregion
 

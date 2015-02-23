@@ -23,6 +23,39 @@ namespace JohnsonNet.Operation
             this.CurrentConnectionString = connectionString;
 
         }
+
+        public void ExecuteBulk(string query)
+        {
+            string[] queries = query.Split(new[] { "\r\nGO", "\nGO", "\rGO", " GO", "\tGO", "GO\r\n", "GO\n", "GO\r", "GO ", "GO\t" }, StringSplitOptions.RemoveEmptyEntries);
+
+            using (var conn = CurrentConnectionString.ToIDbConnection())
+            {
+                conn.Open();
+
+                try
+                {
+                    foreach (string q in queries)
+                    {
+                        using (var command = conn.CreateCommand())
+                        {
+                            command.CommandText = q;
+                            command.CommandType = CommandType.Text;
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         public virtual int ExecuteNonQuery(string proc, ParamDictionary parameters)
         {
             using (var conn = CurrentConnectionString.ToIDbConnection())
@@ -49,14 +82,16 @@ namespace JohnsonNet.Operation
                 }
                 catch (Exception ex)
                 {
-                    conn.Close();
                     throw ex;
+                }
+                finally
+                {
+                    conn.Close();
                 }
 
                 return result;
             }
         }
-       
         public virtual void ExecuteReader(string proc, ParamDictionary parameters, Action<IDataReader> use)
         {
             using (var conn = CurrentConnectionString.ToIDbConnection())
@@ -85,8 +120,11 @@ namespace JohnsonNet.Operation
                 }
                 catch (Exception ex)
                 {
-                    conn.Close();
                     throw ex;
+                }
+                finally
+                {
+                    conn.Close();
                 }
             }
         }

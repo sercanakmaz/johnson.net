@@ -16,20 +16,20 @@ namespace JohnsonNet.Data
             if (obj == null) return null;
 
             var itemType = obj.GetType();
-            var properties = itemType.GetProperties();
+            var properties = JohnsonManager.Reflection.GetPropertiesWithoutHidings(itemType);
             var parameters = new ParamDictionary();
 
-            foreach (var prp in properties)
+            foreach (var property in properties)
             {
-                if (prp.GetAttribute<IgnoreAttribute>() != null)
+                if (property.GetAttribute<IgnoreAttribute>() != null)
                     continue;
 
                 string fieldName = null;
-                fieldName = (prp.GetAttribute<FieldMapAttribute>() ?? new FieldMapAttribute()).FieldName;
+                fieldName = (property.GetAttribute<FieldMapAttribute>() ?? new FieldMapAttribute()).FieldName;
 
-                if (string.IsNullOrEmpty(fieldName)) fieldName = prp.Name;
+                if (string.IsNullOrEmpty(fieldName)) fieldName = property.Name;
 
-                parameters.Add(fieldName, prp.GetValue(obj, null));
+                parameters.Add(fieldName, property.GetValue(obj, null));
             }
 
             return parameters;

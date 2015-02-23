@@ -47,6 +47,19 @@ namespace System
                 return action(Next, Current, Previous);
             });
         }
+        public static int IndexOf<T>(this IEnumerable<T> collection, Func<T, bool> predicate)
+        {
+            int index = 0;
+            foreach (T value in collection)
+            {
+                if (predicate(value))
+                    return index;
+
+                index++;
+            }
+
+            return -1;
+        }
         #endregion
         #region Dictionary
         public static Dictionary<TKey, TValue> AddRange<TKey, TValue>(this Dictionary<TKey, TValue> obj, Dictionary<TKey, TValue> items)
