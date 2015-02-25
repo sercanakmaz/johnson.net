@@ -104,7 +104,7 @@ namespace JohnsonNet.Operation
 
         public IEnumerable<PropertyInfo> GetPropertiesWithoutHidings(Type targetType)
         {
-            List<PropertyInfo> targetMembers = new List<PropertyInfo>(targetType.GetProperties());
+            List<PropertyInfo> targetMembers = new List<PropertyInfo>(targetType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static));
             List<PropertyInfo> distinctMembers = new List<PropertyInfo>(targetMembers.Count);
 
             foreach (var groupedMember in targetMembers.GroupBy(m => m.Name))

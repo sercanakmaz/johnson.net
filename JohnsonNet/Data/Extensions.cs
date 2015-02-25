@@ -38,7 +38,7 @@ namespace JohnsonNet.Data
         {
             var result = new List<T>();
             var itemType = typeof(T);
-            var properties = itemType.GetProperties();
+            var properties = JohnsonManager.Reflection.GetPropertiesWithoutHidings(itemType);
 
             while (reader.Read())
             {
