@@ -36,10 +36,10 @@ namespace JohnsonNet.Serialization
             string baseUri = JohnsonManager.Config.Current.GetSetting("AbsoluteUriConverter-BaseUri");
 
             // IsRelativeUri
-            if (Uri.IsWellFormedUriString(typedValue.OriginalString, UriKind.Relative) && !string.IsNullOrEmpty(baseUri))
+            if (!typedValue.IsAbsoluteUri && !string.IsNullOrEmpty(baseUri))
             {
                 Uri baseUriTyped = new Uri(baseUri);
-                writer.WriteValue(new Uri(baseUriTyped, typedValue.OriginalString));
+                writer.WriteValue(new Uri(baseUriTyped, typedValue));
                 return;
             }
 

@@ -60,6 +60,18 @@ namespace System
 
             return -1;
         }
+        public static IEnumerable<T> AddReturned<T>(this List<T> obj, T item)
+        {
+            obj.Add(item);
+
+            return obj;
+        }
+        public static IEnumerable<T> InsertReturned<T>(this List<T> obj, int index, T item)
+        {
+            obj.Insert(index, item);
+
+            return obj;
+        }
         #endregion
         #region Dictionary
         public static Dictionary<TKey, TValue> AddRange<TKey, TValue>(this Dictionary<TKey, TValue> obj, Dictionary<TKey, TValue> items)
