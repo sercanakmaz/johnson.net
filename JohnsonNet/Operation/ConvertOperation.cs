@@ -10,9 +10,10 @@ namespace JohnsonNet.Operation
 {
     public class ConvertOperation
     {
-        private object TryTo(Type type, object value, object defaultValue, string cultureInfo)
+        private object TryTo(Type type, object value, object defaultValue, string cultureInfo, out bool convertSucceed)
         {
             CultureInfo info = string.IsNullOrEmpty(cultureInfo) ? System.Threading.Thread.CurrentThread.CurrentCulture : new CultureInfo(cultureInfo);
+            convertSucceed = true;
 
             try
             {
@@ -37,6 +38,7 @@ namespace JohnsonNet.Operation
             }
             catch
             {
+                convertSucceed = false;
                 return Default(type, value, defaultValue);
             }
         }
@@ -47,11 +49,21 @@ namespace JohnsonNet.Operation
                 return Default(type, value, defaultValue);
 
             Type underlyingType = Nullable.GetUnderlyingType(type);
+            bool convertSucceed;
 
             if (underlyingType != null)
-                return TryTo(underlyingType, value, defaultValue, cultureInfo);
+            {
+                var underlyingConverted = TryTo(underlyingType, value, defaultValue, cultureInfo, out convertSucceed);
 
-            return TryTo(type, value, defaultValue, cultureInfo);
+                if (!convertSucceed)
+                {
+                    return Default(type, value, defaultValue);
+                }
+
+                return underlyingConverted;
+            }
+
+            return TryTo(type, value, defaultValue, cultureInfo, out convertSucceed);
         }
         public object Default(Type type, object value, object defaultValue = null)
         {

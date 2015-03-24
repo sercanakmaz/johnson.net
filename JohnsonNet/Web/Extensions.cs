@@ -9,7 +9,7 @@ using JohnsonNet;
 namespace System.Web
 {
     public static class Extensions
-    { 
+    {
         # region | Request Values |
         private static T ReqValue<T>(System.Web.UI.TemplateControl P, String ParamName, T DefaultValue)
         {
@@ -137,7 +137,7 @@ namespace System.Web
         }
         public static string CookieValue(this HttpContext obj, string key, string def = null)
         {
-            return obj.CookieValue<string>(def);
+            return obj.CookieValue<string>(key, def);
         }
 
         # endregion
