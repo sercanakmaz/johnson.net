@@ -25,7 +25,7 @@ namespace JohnsonNet.WebAPI
             try
             {
                 string controllerName = RequestContext.RouteData.Values["controller"] as string;
-                bool isPost = context.Request.HttpMethod.Equals("POST", StringComparison.CurrentCultureIgnoreCase);
+                bool isPost = context.Request.HttpMethod.Equals("POST", StringComparison.InvariantCultureIgnoreCase);
                 actionName = RequestContext.RouteData.Values["action"] as string ?? context.Request.HttpMethod;
                 permalinkParameter = RequestContext.RouteData.Values["param"] as string;
 
@@ -54,7 +54,7 @@ namespace JohnsonNet.WebAPI
                 if (instance.Serializer != null)
                     serializer = instance.Serializer;
 
-                var method = controllerType.GetMethods().FirstOrDefault(p => p.Name.Equals(actionName, StringComparison.CurrentCultureIgnoreCase) && p.IsPublic);
+                var method = controllerType.GetMethods().FirstOrDefault(p => p.Name.Equals(actionName, StringComparison.InvariantCultureIgnoreCase) && p.IsPublic);
 
                 if (method == null)
                     throw new ArgumentException("action");
