@@ -17,21 +17,31 @@ namespace JohnsonNet.Operation
 
             try
             {
+                string valueAsString = value.ToString();
+
                 if (type == typeof(Guid))
                 {
-                    return Guid.Parse(value.ToString());
+                    return Guid.Parse(valueAsString);
                 }
                 else if (type.IsEnum)
                 {
-                    return Enum.Parse(type, value.ToString());
+                    return Enum.Parse(type, valueAsString);
                 }
                 else if (type == typeof(XElement))
                 {
-                    return XElement.Parse(value.ToString());
+                    if (string.IsNullOrEmpty(valueAsString))
+                    {
+                        return null;
+                    }
+                    return XElement.Parse(valueAsString);
                 }
                 else if (type == typeof(Uri))
                 {
-                    return new Uri(value.ToString(), UriKind.RelativeOrAbsolute);
+                    if (string.IsNullOrEmpty(valueAsString))
+                    {
+                        return null;
+                    }
+                    return new Uri(valueAsString, UriKind.RelativeOrAbsolute);
                 }
 
                 return Convert.ChangeType(value, type, info);
