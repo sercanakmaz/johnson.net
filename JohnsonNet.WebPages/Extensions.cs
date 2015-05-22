@@ -118,6 +118,7 @@ namespace System.Web.WebPages
         public static string Permalinks(this System.Web.WebPages.WebPage obj)
         {
             RouteValueDictionary routes = obj.Context.Items["__Route"] as RouteValueDictionary;
+            if (routes == null) return null;
             return "/" + string.Join("/", routes.Keys.Select(p => routes[p]));
         }
 

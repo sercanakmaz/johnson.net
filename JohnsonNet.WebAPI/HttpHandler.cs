@@ -12,6 +12,36 @@ namespace JohnsonNet.WebAPI
 {
     public class HttpHandler : IHttpHandlerBase
     {
+        private static List<Type> p_Controllers = null;
+        private static List<Type> Controllers
+        {
+            get
+            {
+                if (p_Controllers == null)
+                {
+                    p_Controllers = AppDomain.CurrentDomain.GetAssemblies()
+                        .Extract((p) =>
+                            p.GetTypes()
+                            .Where(t => t.IsSubclassOf(typeof(ApiController)))
+                            .ToList())
+                        .ToList();
+                }
+
+                return p_Controllers;
+            }
+        }
+
+        private static int GetInheritenceCount(Type t)
+        {
+            int result = 0;
+            while (t != typeof(object))
+            {
+                t = t.BaseType;
+                result++;
+            }
+            return result;
+        }
+
         public void ProcessRequest(HttpContext context)
         {
             ISerializer serializer = JohnsonManager.Json;
@@ -42,15 +72,15 @@ namespace JohnsonNet.WebAPI
                     //    throw new ArgumentNullException("RequestBody");
                 }
 
-                var assemlby = BuildManager.GetGlobalAsaxType().BaseType.Assembly;
-                var controllerType = assemlby.GetTypes()
-                            .Where(p => p.BaseType == typeof(ApiController))
-                            .FirstOrDefault(p => p.Name.StartsWith(controllerName, StringComparison.InvariantCultureIgnoreCase));
+                var controllerType = Controllers
+                    .Where(p => p.Name.Equals(controllerName + "Controller", StringComparison.InvariantCultureIgnoreCase))
+                    .OrderByDescending(p => GetInheritenceCount(p))
+                    .FirstOrDefault();
 
                 if (controllerType == null)
                     throw new ArgumentException("controller");
 
-                instance = assemlby.CreateInstance(controllerType.FullName) as ApiController;
+                instance = controllerType.Assembly.CreateInstance(controllerType.FullName) as ApiController;
                 if (instance.Serializer != null)
                     serializer = instance.Serializer;
 

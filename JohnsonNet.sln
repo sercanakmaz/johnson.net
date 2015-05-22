@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JohnsonNet.WebAPI", "Johnso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{6AF57635-3F11-4C89-8AE8-0A47A240E7C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Web", "Test.Web\Test.Web.csproj", "{3884DB2D-2C0E-4FA9-B316-847C2FA40C81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{6AF57635-3F11-4C89-8AE8-0A47A240E7C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AF57635-3F11-4C89-8AE8-0A47A240E7C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AF57635-3F11-4C89-8AE8-0A47A240E7C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3884DB2D-2C0E-4FA9-B316-847C2FA40C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3884DB2D-2C0E-4FA9-B316-847C2FA40C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3884DB2D-2C0E-4FA9-B316-847C2FA40C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3884DB2D-2C0E-4FA9-B316-847C2FA40C81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
