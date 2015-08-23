@@ -3,14 +3,14 @@ johnson.net - a simple .net project helper
 
 Features
 --------
-Environment configuration operations
-Convert operations
-Data operations
-IO operations
-Log operations
-Mail operations
-Multithread operations
-Reflection operations
+1. Environment configuration operations
+2. Convert operations
+3. Data operations
+4. IO operations
+5. Log operations
+6. Mail operations
+7. Multithread operations
+8. Reflection operations
 
 
 Environment Configuration
