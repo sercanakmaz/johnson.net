@@ -16,7 +16,7 @@ Reflection operations
 Environment Configuration
 ------------------------------------------------------------
 
-Add config section to your web.config/appconfig
+1. Add config section to your web.config/appconfig
 
 ```xml
 <configSections>
@@ -24,7 +24,7 @@ Add config section to your web.config/appconfig
 </configSections>
 ```
 
-Add environment rule (ComputerName)
+2. Add environment rule (ComputerName)
 
 ```xml
 <environmentConfig live="~/Config/Live.config" local="~/Config/Local.config" test="~/Config/Test.config" provider="JohnsonNet.Config.ConfigurationFileProvider">
@@ -36,7 +36,7 @@ Add environment rule (ComputerName)
 </environmentConfig>
 ```
 
-Add environment rule (RequestHost)
+3. Add environment rule (RequestHost)
 ```xml
   <environmentConfig live="~/Config/Live.config" local="~/Config/Local.config" test="~/Config/Test.config" provider="JohnsonNet.Config.ConfigurationFileProvider">
     <rules type="Request">
@@ -47,4 +47,12 @@ Add environment rule (RequestHost)
   </environmentConfig>
 ```
 
-Add environment configuration files to your visual studio project
+4. Add environment configuration files to your visual studio project
+5. Get your configuration data.
+
+```csharp
+    var connectionString = JohnsonManager.Config.Current.GetConnectionString("LocalSqlServer");
+    var applicationID = JohnsonManager.Config.Current.GetSetting<long>("Facebook-ApplicationID");
+    var applicationGuid = JohnsonManager.Config.Current.GetSetting<Guid>("Facebook-Guid");
+    var service = JohnsonManager.Config.Current.GetCommunicationObject<IYourServiceChannel>();
+```
