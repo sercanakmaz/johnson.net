@@ -56,3 +56,19 @@ Environment Configuration
     var applicationGuid = JohnsonManager.Config.Current.GetSetting<Guid>("Facebook-Guid");
     var service = JohnsonManager.Config.Current.GetCommunicationObject<IYourServiceChannel>();
 ```
+Also 
+
+1. You can get your current environment.
+```csharp
+JohnsonManager.Config.CurrentEnvironment // Local,Test,PreProduction Live
+```
+2. You can build your own ConfigurationProvider.
+```xml
+  <environmentConfig live="~/Config/Live.config" local="~/Config/Local.config" test="~/Config/Test.config" provider="~~YourNameSpace.SqlConfigurationProvider~~">
+    <rules type="Request">
+      <add environment="Test" param="test.johnson.net"/>
+      <add environment="Live" param="johnson.net"/>
+      <add environment="Live" param="www.johnson.net"/>
+    </rules>
+  </environmentConfig>
+```
