@@ -16,7 +16,7 @@ Reflection operations
 Environment Configuration
 ------------------------------------------------------------
 
-1. Add config section to your web.config/appconfig
+1 Add config section to your web.config/appconfig
 
 ```xml
 <configSections>
@@ -24,7 +24,7 @@ Environment Configuration
 </configSections>
 ```
 
-2. Add environment rule (ComputerName)
+2 Add environment rule (ComputerName)
 
 ```xml
 <environmentConfig live="~/Config/Live.config" local="~/Config/Local.config" test="~/Config/Test.config" provider="JohnsonNet.Config.ConfigurationFileProvider">
@@ -36,7 +36,7 @@ Environment Configuration
 </environmentConfig>
 ```
 
-3. Add environment rule (RequestHost)
+3 Add environment rule (RequestHost)
 ```xml
   <environmentConfig live="~/Config/Live.config" local="~/Config/Local.config" test="~/Config/Test.config" provider="JohnsonNet.Config.ConfigurationFileProvider">
     <rules type="Request">
@@ -47,8 +47,8 @@ Environment Configuration
   </environmentConfig>
 ```
 
-4. Add environment configuration files to your visual studio project
-5. Get your configuration data.
+4 Add environment configuration files to your visual studio project
+5 Get your configuration data.
 
 ```csharp
     var connectionString = JohnsonManager.Config.Current.GetConnectionString("LocalSqlServer");
@@ -58,17 +58,13 @@ Environment Configuration
 ```
 Also 
 
-1. You can get your current environment.
+1 You can get your current environment.
 ```csharp
 JohnsonManager.Config.CurrentEnvironment // Local,Test,PreProduction Live
 ```
-2. You can build your own ConfigurationProvider.
+2 You can build your own ConfigurationProvider.
 ```xml
-  <environmentConfig live="~/Config/Live.config" local="~/Config/Local.config" test="~/Config/Test.config" provider="~~YourNameSpace.SqlConfigurationProvider~~">
-    <rules type="Request">
-      <add environment="Test" param="test.johnson.net"/>
-      <add environment="Live" param="johnson.net"/>
-      <add environment="Live" param="www.johnson.net"/>
-    </rules>
+  <environmentConfig provider="YourNameSpace.YourConfigurationProvider">
+  
   </environmentConfig>
 ```
