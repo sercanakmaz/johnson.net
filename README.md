@@ -13,7 +13,7 @@ Features
 8. Reflection operations
 
 
-Environment Configuration
+1. Environment Configuration
 ------------------------------------------------------------
 
 1 Add config section to your web.config/appconfig
@@ -67,4 +67,13 @@ JohnsonManager.Config.CurrentEnvironment // Local,Test,PreProduction Live
   <environmentConfig provider="YourNameSpace.YourConfigurationProvider">
   
   </environmentConfig>
+```
+
+2. Convert anything to anything
+------------------------------------------------------------
+```csharp
+var nullableGuid = JohnsonManager.Convert.To<Guid?>("12312sfd");
+var yourEnum = JohnsonManager.Convert.To<YourEnum>("En");
+var yourDecimal = JohnsonManager.Convert.To(typeof(decimal), "123.12");
+var yourDouble = JohnsonManager.Convert.To<double>("123.12");
 ```
