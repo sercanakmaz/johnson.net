@@ -77,6 +77,19 @@ var yourEnum = JohnsonManager.Convert.To<YourEnum>("En");
 var yourDecimal = JohnsonManager.Convert.To(typeof(decimal), "123.12");
 var yourDouble = JohnsonManager.Convert.To<double>("123.12");
 ```
+
 3. A simple ORM
+------------------------------------------------------------
+
 ```csharp
+class Product
+{
+    public int ID { get; set; }
+    public string Name { get; set; }
+}
+
+JohnsonManager.Data.Execute<Product>("GetProduct", new ParamDictionary
+{
+    { "ID", 1 }
+});
 ```
