@@ -46,3 +46,5 @@ Add environment rule (RequestHost)
     </rules>
   </environmentConfig>
 ```
+
+Add environment configuration files to your visual studio project
