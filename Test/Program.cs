@@ -30,7 +30,7 @@ namespace Test
                 CouponCode = "KOD-03"
             });
 
-            JohnsonQueueManager.Add(new OrderQueueyi 
+            JohnsonQueueManager.Add(new OrderQueue
             {
                 OrderID = 1
             });
