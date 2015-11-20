@@ -20,11 +20,25 @@ namespace JohnsonNet.WebAPI
                 if (p_Controllers == null)
                 {
                     p_Controllers = AppDomain.CurrentDomain.GetAssemblies()
-                        .Extract((p) =>
-                            p.GetTypes()
-                            .Where(t => t.IsSubclassOf(typeof(ApiController)))
-                            .ToList())
-                        .ToList();
+                    .Extract((p) =>
+                    {
+                        Type[] returnList = null;
+
+                        try
+                        {
+                            returnList = p.GetTypes();
+                        }
+                        catch (System.Reflection.ReflectionTypeLoadException ex)
+                        {
+                            returnList = ex.Types;
+                        }
+
+                        return returnList
+                            .Where(t => t != null)
+                            .Where(t => t.IsSubclassOf(typeof(JohnsonNet.WebAPI.ApiController)))
+                            .ToList();
+                    })
+                    .ToList();
                 }
 
                 return p_Controllers;

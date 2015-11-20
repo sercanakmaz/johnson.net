@@ -66,13 +66,16 @@
   <ItemGroup>
     <Compile Include="Controller.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="PostAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteCollectionExtension.cs" />
     <Compile Include="RoutePage.cs" />
     <Compile Include="WebPagesRouteHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JohnsonNet\JohnsonNet.csproj">

@@ -8,37 +8,45 @@ namespace JohnsonNet.WebPages
 {
     public class Controller
     {
-        protected WebPage CurrentWebPage = null;
+        protected WebPage Page = null;
 
         public Dictionary<string, object> ClientData
         {
             get
             {
-                return CurrentWebPage.PageData["ClientDataObject"] as Dictionary<string, object>;
+                return PageData["ClientDataObject"] as Dictionary<string, object>;
+            }
+        }
+
+        public IDictionary<object, dynamic> PageData
+        {
+            get
+            {
+                return Page.PageData;
+            }
+        }
+
+        public System.Web.HttpRequestBase Request
+        {
+            get
+            {
+                return Page.Request;
+            }
+        }
+
+        public System.Web.HttpResponseBase Response
+        {
+            get
+            {
+                return Page.Response;
             }
         }
 
         internal void Init(WebPage page)
         {
-            this.CurrentWebPage = page;
+            this.Page = page;
 
-            if (ClientData == null) page.PageData["ClientDataObject"] = new Dictionary<string, object>();
-
-            this.ProcessRequest();
-        }
-
-        public virtual void ProcessRequest()
-        {
-        }
-
-        public T Action<T>(WebPage page)
-        {
-            string actionName = page.RequestValue("action");
-            var controllerType = this.GetType();
-            var method = controllerType.GetMethods().FirstOrDefault(p => p.Name.Equals(actionName, StringComparison.CurrentCultureIgnoreCase) && p.IsPublic);
-            if (method == null) throw new NotImplementedException();
-
-            return (T)method.Invoke(this, new object[] { page });
+            if (ClientData == null) this.PageData["ClientDataObject"] = new Dictionary<string, object>();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace System.Web.WebPages
     {
         public static T PageData<T>(this WebPage obj, string key, T def = default(T))
         {
-            if (typeof(T).IsValueType)
+            if (typeof(T).IsValueType || typeof(T) == typeof(string))
             {
                 return JohnsonManager.Convert.To<T>(obj.PageData[key], def);
             }
@@ -27,7 +27,7 @@ namespace System.Web.WebPages
 
         public static T Session<T>(this WebPage obj, string key, T def = default(T))
         {
-            if (typeof(T).IsValueType)
+            if (typeof(T).IsValueType || typeof(T) == typeof(string))
             {
                 return JohnsonManager.Convert.To<T>(obj.Session[key], def);
             }
@@ -126,8 +126,19 @@ namespace System.Web.WebPages
         {
             if (type.BaseType != typeof(Controller))
                 throw new Exception("Controller must be inherited from Controller");
+            
             var controller = Activator.CreateInstance(type) as Controller;
+            var actionName = obj.GetRouteValue("Permalink2", "Index");
+            var actionMethod = type.GetMethods().FirstOrDefault(p => p.Name.Equals(actionName, StringComparison.InvariantCultureIgnoreCase) && p.IsPublic);
+            var isPostMethod = actionMethod.GetAttribute<PostAttribute>() != null;
+
+            if (isPostMethod && !obj.Request.HttpMethod.EqualsWithCurrentCulture("post"))
+            {
+                actionMethod = type.GetMethods().FirstOrDefault(p => p.Name.Equals("Index", StringComparison.InvariantCultureIgnoreCase) && p.IsPublic);
+            }
+
             controller.Init(obj);
+            actionMethod.Invoke(controller, null);
         }
     }
 }
