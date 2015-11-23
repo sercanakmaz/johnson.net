@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Web", "Test.Web\Test.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JohnsonNet.Queue", "JohnsonNet.Queue\JohnsonNet.Queue.csproj", "{4B61AF98-149F-4BC7-B4D9-FC8534E9F720}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Console", "Test.Console\Test.Console.csproj", "{FA45A57B-E88C-4E83-AFE9-12B4D9FDB651}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{4B61AF98-149F-4BC7-B4D9-FC8534E9F720}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B61AF98-149F-4BC7-B4D9-FC8534E9F720}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B61AF98-149F-4BC7-B4D9-FC8534E9F720}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA45A57B-E88C-4E83-AFE9-12B4D9FDB651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA45A57B-E88C-4E83-AFE9-12B4D9FDB651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA45A57B-E88C-4E83-AFE9-12B4D9FDB651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA45A57B-E88C-4E83-AFE9-12B4D9FDB651}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
