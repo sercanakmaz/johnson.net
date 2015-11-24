@@ -21,7 +21,7 @@ namespace JohnsonNet.Queue
             this.ParameterAssemblyName = type.Assembly.GetName().Name;
             this.ParameterTypeName = type.FullName;
             this.PropertyValues = new Dictionary<string, object>();
-
+            
             foreach (var item in JohnsonManager.Reflection.GetPropertiesWithoutHidings(type))
             {
                 this.PropertyValues.Add(item.Name, JohnsonManager.Reflection.GetPropertyValue(input, item.Name));
@@ -32,6 +32,7 @@ namespace JohnsonNet.Queue
 
         public string ParameterAssemblyName { get; set; }
         public string ParameterTypeName { get; set; }
+        public int TryCount { get; set; }
         public Dictionary<string, object> PropertyValues { get; set; }
     }
 }

@@ -9,12 +9,28 @@ namespace JohnsonNet.Queue
 {
     public class JohnsonNetQueueConfig : ConfigurationSection
     {
-        [ConfigurationProperty("provider", IsRequired = true)]
-        public string Provider
+        [ConfigurationProperty("dataProvider", IsRequired = true)]
+        public string DataProvider
         {
             get
             {
-                return this["provider"] as string;
+                return this["dataProvider"] as string;
+            }
+        }
+        [ConfigurationProperty("errorProvider", IsRequired = true)]
+        public string ErrorProvider
+        {
+            get
+            {
+                return this["errorProvider"] as string;
+            }
+        }
+        [ConfigurationProperty("tryCount", IsRequired = true)]
+        public int TryCount
+        {
+            get
+            {
+                return JohnsonManager.Convert.To<int>(this["tryCount"]);
             }
         }
     }

@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CouponQueue.cs" />
+    <Compile Include="JohnsonNetQueueMailErrorProvider.cs" />
     <Compile Include="JohnsonNetQueueRedisDataProvider.cs" />
     <Compile Include="OrderQueue.cs" />
     <Compile Include="Program.cs" />

@@ -12,6 +12,10 @@ namespace Test.Console
 
         public bool DeQueue()
         {
+            if (CouponCode.EqualsWithCurrentCulture("KOD-03"))
+            {
+                throw new NotImplementedException();
+            }
             System.Console.WriteLine(this.CouponCode);
 
             return true;

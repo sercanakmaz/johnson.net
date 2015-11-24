@@ -12,6 +12,19 @@ namespace System
 {
     public class JohnsonQueueManager
     {
+        private static JohnsonNetQueueConfig p_CurrentJohnsonNetQueueConfig = null;
+        internal static JohnsonNetQueueConfig CurrentJohnsonNetQueueConfig
+        {
+            get
+            {
+                if (p_CurrentJohnsonNetQueueConfig == null)
+                {
+                    p_CurrentJohnsonNetQueueConfig = ConfigurationManager.GetSection("johnsonNetQueueConfig") as JohnsonNetQueueConfig;
+                }
+                return p_CurrentJohnsonNetQueueConfig;
+            }
+        }
+
         private static IJohnsonQueueDataProvider p_DataProvider = null;
         internal static IJohnsonQueueDataProvider DataProvider
         {
@@ -19,19 +32,36 @@ namespace System
             {
                 if (p_DataProvider == null)
                 {
-                    var config = ConfigurationManager.GetSection("johnsonNetQueueConfig") as JohnsonNetQueueConfig;
-                    var providerType = Type.GetType(config.Provider, true);
+                    var providerType = Type.GetType(CurrentJohnsonNetQueueConfig.DataProvider, true);
 
                     p_DataProvider = Activator.CreateInstance(providerType) as IJohnsonQueueDataProvider;
                 }
-
                 return p_DataProvider;
+            }
+        }
+
+        private static IJohnsonQueueErrorProvider p_ErrorProvider = null;
+        internal static IJohnsonQueueErrorProvider ErrorProvider
+        {
+            get
+            {
+                if (p_ErrorProvider == null)
+                {
+                    var providerType = Type.GetType(CurrentJohnsonNetQueueConfig.ErrorProvider, true);
+
+                    p_ErrorProvider = Activator.CreateInstance(providerType) as IJohnsonQueueErrorProvider;
+                }
+                return p_ErrorProvider;
             }
         }
 
         public static void Add(IQueueParameter input)
         {
-            DataProvider.Add(new QueueEntity(input));
+            Add(new QueueEntity(input));
+        }
+        public static void Add(QueueEntity input)
+        {
+            DataProvider.Add(input);
         }
         public static QueueEntity Get()
         {
@@ -41,14 +71,36 @@ namespace System
         {
             try
             {
-                if (!input.Input.DeQueue())
+                bool dequeueResult = false;
+
+                try
                 {
-                    Add(input.Input);
+                    dequeueResult = input.Input.DeQueue();
+                }
+                catch (Exception ex)
+                {
+                    dequeueResult = false;
+                    JohnsonManager.Logger.Log(ex);
+                }
+
+                if (!dequeueResult)
+                {
+                    bool isTryLimitReached = input.TryCount > CurrentJohnsonNetQueueConfig.TryCount;
+
+                    if (isTryLimitReached)
+                    {
+                        ErrorProvider.Process(input);
+                        return;
+                    }
+
+                    input.TryCount += 1;
+
+                    Add(input);
                 }
             }
             catch (Exception ex)
             {
-                Add(input.Input);
+                Add(input);
                 JohnsonManager.Logger.Log(ex);
             }
         }

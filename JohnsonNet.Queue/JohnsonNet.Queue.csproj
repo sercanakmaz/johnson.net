@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IJohnsonQueueErrorProvider.cs" />
     <Compile Include="IQueueParameter.cs" />
     <Compile Include="JohnsonNetQueueConfig.cs" />
     <Compile Include="IQueueEntity.cs" />
