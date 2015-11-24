@@ -40,7 +40,7 @@ namespace Test.Console
 
             JohnsonQueueManager.DeQueuePeriodic();
 
-            Console.Read();
+            System.Console.Read();
         }
     }
 }

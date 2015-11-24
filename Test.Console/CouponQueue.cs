@@ -12,7 +12,7 @@ namespace Test.Console
 
         public bool DeQueue()
         {
-            Console.WriteLine(this.CouponCode);
+            System.Console.WriteLine(this.CouponCode);
 
             return true;
         }

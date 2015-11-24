@@ -12,7 +12,7 @@ namespace Test.Console
 
         public bool DeQueue()
         {
-            Console.WriteLine("OrderID: {0}", OrderID);
+            System.Console.WriteLine("OrderID: {0}", OrderID);
 
             return true;
         }
