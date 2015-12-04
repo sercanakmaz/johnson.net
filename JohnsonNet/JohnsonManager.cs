@@ -121,6 +121,18 @@ namespace JohnsonNet
             }
         }
 
+        private static CacheOperation p_Cache = null;
+        public static CacheOperation Cache
+        {
+            get
+            {
+                if (p_Cache == null)
+                    p_Cache = new CacheOperation();
+
+                return p_Cache;
+            }
+        }
+
         #region Serialization
         private static JsonSerializer p_Json = null;
         public static JsonSerializer Json

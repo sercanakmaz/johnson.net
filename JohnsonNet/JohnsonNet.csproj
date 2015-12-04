@@ -58,6 +58,7 @@
     <Compile Include="Config\Providers\ConfigurationFileProvider.cs" />
     <Compile Include="Config\Providers\IProvider.cs" />
     <Compile Include="Data\IgnoreAttribute.cs" />
+    <Compile Include="Operation\CacheOperation.cs" />
     <Compile Include="Operation\ConfigOperation.cs" />
     <Compile Include="Operation\ConvertOperation.cs">
       <SubType>Code</SubType>

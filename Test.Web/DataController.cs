@@ -1,4 +1,5 @@
-﻿using JohnsonNet.WebAPI;
+﻿using JohnsonNet;
+using JohnsonNet.WebAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +7,19 @@ using System.Text;
 
 namespace Test.Web
 {
-    public class DataController : Test.Web.Base.DataController
+    public class DataController : ApiController
     {
-        public override EmptyOutput Get()
+        public static int D = 0; 
+        public  GenericOutput<int> Get()
         {
-            return new EmptyOutput { Status = OutputStatus.Failed };
+            D++;
+            MyClass i = JohnsonManager.Cache.Get<MyClass>("deneme", getAction: () => { return new MyClass { MyProperty = D }; });
+
+            return new GenericOutput<int> { Status = OutputStatus.Failed, Data = i.MyProperty };
         }
+    }
+    class MyClass
+    {
+        public int MyProperty { get; set; }
     }
 }
