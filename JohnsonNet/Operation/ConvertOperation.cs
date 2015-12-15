@@ -55,7 +55,7 @@ namespace JohnsonNet.Operation
 
         public object To(Type type, object value, object defaultValue = null, string cultureInfo = null)
         {
-            if (value == null || value == DBNull.Value)
+            if (value == null || value == DBNull.Value || (type == typeof(string) ? string.IsNullOrEmpty(value.ToString()) : false))
                 return Default(type, value, defaultValue);
 
             Type underlyingType = Nullable.GetUnderlyingType(type);
@@ -87,13 +87,8 @@ namespace JohnsonNet.Operation
                 return defaultValue;
             }
 
-            if (value == null || value == DBNull.Value) return defaultValue;
-
-            if (type == typeof(string))
-            {
-                if (string.IsNullOrEmpty(value.ToString()))
-                    return defaultValue;
-            }
+            if (value == null || value == DBNull.Value || (type == typeof(string) ? string.IsNullOrEmpty(value.ToString()) : false))
+                return defaultValue;
 
             return value;
         }

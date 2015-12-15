@@ -16,6 +16,11 @@ namespace Test.Console
     {
         static void Main(string[] args)
         {
+            string d = JohnsonManager.Convert.To<string>(string.Empty);
+
+            System.Console.WriteLine(d);
+
+            System.Console.ReadKey();
         }
     }
 }

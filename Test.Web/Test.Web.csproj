@@ -71,6 +71,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Route.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -82,6 +83,10 @@
     <ProjectReference Include="..\JohnsonNet.WebAPI\JohnsonNet.WebAPI.csproj">
       <Project>{adcd22c7-8beb-450f-8df1-e65f79186b41}</Project>
       <Name>JohnsonNet.WebAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JohnsonNet.WebPages\JohnsonNet.WebPages.csproj">
+      <Project>{c84dc620-d777-40a6-9ebb-2c69417d73d6}</Project>
+      <Name>JohnsonNet.WebPages</Name>
     </ProjectReference>
     <ProjectReference Include="..\JohnsonNet\JohnsonNet.csproj">
       <Project>{2013303a-6c43-4e92-b9e0-e243e3f05ec0}</Project>
