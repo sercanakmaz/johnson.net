@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Configuration;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
@@ -128,7 +129,7 @@ namespace JohnsonNet.Config
             {
                 if (serviceEndpoint.Binding == null)
                 {
-                    serviceEndpoint.Binding = CreateBinding(selectedEndpoint.Binding, group);
+                    serviceEndpoint.Binding = CreateBinding(selectedEndpoint.Binding, selectedEndpoint.BindingConfiguration, group);
                 }
 
                 if (serviceEndpoint.Address == null)
@@ -154,14 +155,14 @@ namespace JohnsonNet.Config
         /// <param name="bindingName"></param>
         /// <param name="group"></param>
         /// <returns></returns>
-        private Binding CreateBinding(string bindingName, ServiceModelSectionGroup group)
+        private Binding CreateBinding(string bindingName, string bindingConfiguration, ServiceModelSectionGroup group)
         {
             BindingCollectionElement bindingElementCollection = group.Bindings[bindingName];
             if (bindingElementCollection.ConfiguredBindings.Count > 0)
             {
-                IBindingConfigurationElement be = bindingElementCollection.ConfiguredBindings[0];
-
+                IBindingConfigurationElement be = bindingElementCollection.ConfiguredBindings.FirstOrDefault(p => p.Name.Equals(bindingConfiguration));
                 Binding binding = GetBinding(be);
+
                 if (be != null)
                 {
                     be.ApplyConfiguration(binding);

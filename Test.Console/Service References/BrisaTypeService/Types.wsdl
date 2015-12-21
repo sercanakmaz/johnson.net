@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ServerUrl/Types/FunctionName" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ServerUrl/Types/FunctionName" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ServerUrl/Types/FunctionName">
+      <s:element name="GetCountries">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCountriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCountriesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCities">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlCity" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCitiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCitiesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDistricts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlCounties" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDistrictsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDistrictsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetJobs">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetJobsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetJobsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetApplicationSubjects">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetApplicationSubjectsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetApplicationSubjectsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetApplicationSubSubjects">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlSubject" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetApplicationSubSubjectsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetApplicationSubSubjectsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubjectDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlSubSubject" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubjectDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSubjectDetailsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductGroups">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetProductGroupsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProductGroupsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAddresses">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XmlGetAddresses" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAddressesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAddressesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getRegion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XmlGetRegion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getRegionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getRegionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getRegionDealers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XmlGetDealer" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getRegionDealersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getRegionDealersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCountryDealers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XmlGetDealer" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCountryDealersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getCountryDealersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCountriesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCountries" />
+  </wsdl:message>
+  <wsdl:message name="GetCountriesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCountriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCitiesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCities" />
+  </wsdl:message>
+  <wsdl:message name="GetCitiesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCitiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDistrictsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDistricts" />
+  </wsdl:message>
+  <wsdl:message name="GetDistrictsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDistrictsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetJobsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetJobs" />
+  </wsdl:message>
+  <wsdl:message name="GetJobsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetJobsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetApplicationSubjectsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetApplicationSubjects" />
+  </wsdl:message>
+  <wsdl:message name="GetApplicationSubjectsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetApplicationSubjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetApplicationSubSubjectsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetApplicationSubSubjects" />
+  </wsdl:message>
+  <wsdl:message name="GetApplicationSubSubjectsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetApplicationSubSubjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSubjectDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSubjectDetails" />
+  </wsdl:message>
+  <wsdl:message name="GetSubjectDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSubjectDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductGroupsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductGroups" />
+  </wsdl:message>
+  <wsdl:message name="GetProductGroupsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAddressesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAddresses" />
+  </wsdl:message>
+  <wsdl:message name="GetAddressesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAddressesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRegionSoapIn">
+    <wsdl:part name="parameters" element="tns:getRegion" />
+  </wsdl:message>
+  <wsdl:message name="getRegionSoapOut">
+    <wsdl:part name="parameters" element="tns:getRegionResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRegionDealersSoapIn">
+    <wsdl:part name="parameters" element="tns:getRegionDealers" />
+  </wsdl:message>
+  <wsdl:message name="getRegionDealersSoapOut">
+    <wsdl:part name="parameters" element="tns:getRegionDealersResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCountryDealersSoapIn">
+    <wsdl:part name="parameters" element="tns:getCountryDealers" />
+  </wsdl:message>
+  <wsdl:message name="getCountryDealersSoapOut">
+    <wsdl:part name="parameters" element="tns:getCountryDealersResponse" />
+  </wsdl:message>
+  <wsdl:portType name="TypesSoap">
+    <wsdl:operation name="GetCountries">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This function for get all of countries from crm</wsdl:documentation>
+      <wsdl:input message="tns:GetCountriesSoapIn" />
+      <wsdl:output message="tns:GetCountriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCities">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This function for get all of Cities from crm</wsdl:documentation>
+      <wsdl:input message="tns:GetCitiesSoapIn" />
+      <wsdl:output message="tns:GetCitiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDistricts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This function for get all of Counties from crm</wsdl:documentation>
+      <wsdl:input message="tns:GetDistrictsSoapIn" />
+      <wsdl:output message="tns:GetDistrictsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJobs">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This function for get all of work from crm</wsdl:documentation>
+      <wsdl:input message="tns:GetJobsSoapIn" />
+      <wsdl:output message="tns:GetJobsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationSubjects">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This function for get all of subject of application from crm</wsdl:documentation>
+      <wsdl:input message="tns:GetApplicationSubjectsSoapIn" />
+      <wsdl:output message="tns:GetApplicationSubjectsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationSubSubjects">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This function for get all of SubSubject of application from crm via subjectid</wsdl:documentation>
+      <wsdl:input message="tns:GetApplicationSubSubjectsSoapIn" />
+      <wsdl:output message="tns:GetApplicationSubSubjectsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubjectDetails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This function for get all of Subjectdetail of application from crm via subsubjectid</wsdl:documentation>
+      <wsdl:input message="tns:GetSubjectDetailsSoapIn" />
+      <wsdl:output message="tns:GetSubjectDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductGroups">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This function for get all of Productgroup from crm</wsdl:documentation>
+      <wsdl:input message="tns:GetProductGroupsSoapIn" />
+      <wsdl:output message="tns:GetProductGroupsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAddresses">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This function for get all of Adress Information from Dealer Or Account</wsdl:documentation>
+      <wsdl:input message="tns:GetAddressesSoapIn" />
+      <wsdl:output message="tns:GetAddressesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getRegion">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This function for get all of regions related to the country from crm</wsdl:documentation>
+      <wsdl:input message="tns:getRegionSoapIn" />
+      <wsdl:output message="tns:getRegionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getRegionDealers">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This function for get all of dealer related to the regions from crm</wsdl:documentation>
+      <wsdl:input message="tns:getRegionDealersSoapIn" />
+      <wsdl:output message="tns:getRegionDealersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getCountryDealers">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This function for get all of dealer related to the country from crm</wsdl:documentation>
+      <wsdl:input message="tns:getCountryDealersSoapIn" />
+      <wsdl:output message="tns:getCountryDealersSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TypesSoap" type="tns:TypesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCountries">
+      <soap:operation soapAction="http://ServerUrl/Types/FunctionName/GetCountries" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCities">
+      <soap:operation soapAction="http://ServerUrl/Types/FunctionName/GetCities" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDistricts">
+      <soap:operation soapAction="http://ServerUrl/Types/FunctionName/GetDistricts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJobs">
+      <soap:operation soapAction="http://ServerUrl/Types/FunctionName/GetJobs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationSubjects">
+      <soap:operation soapAction="http://ServerUrl/Types/FunctionName/GetApplicationSubjects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationSubSubjects">
+      <soap:operation soapAction="http://ServerUrl/Types/FunctionName/GetApplicationSubSubjects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubjectDetails">
+      <soap:operation soapAction="http://ServerUrl/Types/FunctionName/GetSubjectDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductGroups">
+      <soap:operation soapAction="http://ServerUrl/Types/FunctionName/GetProductGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddresses">
+      <soap:operation soapAction="http://ServerUrl/Types/FunctionName/GetAddresses" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRegion">
+      <soap:operation soapAction="http://ServerUrl/Types/FunctionName/getRegion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRegionDealers">
+      <soap:operation soapAction="http://ServerUrl/Types/FunctionName/getRegionDealers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCountryDealers">
+      <soap:operation soapAction="http://ServerUrl/Types/FunctionName/getCountryDealers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TypesSoap12" type="tns:TypesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCountries">
+      <soap12:operation soapAction="http://ServerUrl/Types/FunctionName/GetCountries" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCities">
+      <soap12:operation soapAction="http://ServerUrl/Types/FunctionName/GetCities" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDistricts">
+      <soap12:operation soapAction="http://ServerUrl/Types/FunctionName/GetDistricts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJobs">
+      <soap12:operation soapAction="http://ServerUrl/Types/FunctionName/GetJobs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationSubjects">
+      <soap12:operation soapAction="http://ServerUrl/Types/FunctionName/GetApplicationSubjects" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationSubSubjects">
+      <soap12:operation soapAction="http://ServerUrl/Types/FunctionName/GetApplicationSubSubjects" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubjectDetails">
+      <soap12:operation soapAction="http://ServerUrl/Types/FunctionName/GetSubjectDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductGroups">
+      <soap12:operation soapAction="http://ServerUrl/Types/FunctionName/GetProductGroups" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddresses">
+      <soap12:operation soapAction="http://ServerUrl/Types/FunctionName/GetAddresses" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRegion">
+      <soap12:operation soapAction="http://ServerUrl/Types/FunctionName/getRegion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRegionDealers">
+      <soap12:operation soapAction="http://ServerUrl/Types/FunctionName/getRegionDealers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCountryDealers">
+      <soap12:operation soapAction="http://ServerUrl/Types/FunctionName/getCountryDealers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Types">
+    <wsdl:port name="TypesSoap" binding="tns:TypesSoap">
+      <soap:address location="https://crm.brisa-online.com:81/Integration/Types.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TypesSoap12" binding="tns:TypesSoap12">
+      <soap12:address location="https://crm.brisa-online.com:81/Integration/Types.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

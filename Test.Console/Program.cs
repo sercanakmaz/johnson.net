@@ -16,10 +16,15 @@ namespace Test.Console
     {
         static void Main(string[] args)
         {
-            string d = JohnsonManager.Convert.To<string>(string.Empty);
+            using (var service = JohnsonManager.Config.Current.GetCommunicationObject<BrisaTypeService.TypesSoapChannel>())
+            {
+                var responseCity = service.GetCities(new BrisaTypeService.GetCitiesRequest(new BrisaTypeService.GetCitiesRequestBody
+                {
+                    xmlCity = "<GetCities><CountryId>a30ca95a-a22b-e111-b25c-005056b853b9</CountryId></GetCities>"
+                }));
 
-            System.Console.WriteLine(d);
-
+                System.Console.WriteLine(responseCity.Body);
+            }
             System.Console.ReadKey();
         }
     }
