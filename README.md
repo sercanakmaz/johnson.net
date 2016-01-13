@@ -85,6 +85,8 @@ It's looks simple but in a optimum level, it has all you need to develop a enter
 
 By default JohnsonManager.Data uses "LocalSqlServer" connection string, but you can get a new instance from JohnsonNet.Operation.DataOperation class to use your own connection string.
 
+# Execute Method
+
 ```csharp
 class Product
 {
@@ -118,3 +120,17 @@ var products = resultSets.Result1;
 var mappedProducts = resultSets.Result2;
 ```
 
+#ExecuteReader method
+
+```csharp
+JohnsonManager.Data.ExecuteReader("dbo.GetProduct", new ParamDictionary
+{
+    { "ID", 1 }
+}, (reader) =>
+{
+    while (reader.Read())
+    {
+
+    }
+});
+```
