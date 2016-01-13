@@ -114,7 +114,7 @@ JohnsonManager.Data.Execute<Product>("GetProduct", new ParamDictionary
     { "ID", 1 }
 });
 ```
-```csharp FieldMap ``` attribute can help you rename your database field.
+```FieldMap ``` attribute can help you rename your database field.
 
 JohnsonManager.Data supports multiple resultsets from your database.
 
