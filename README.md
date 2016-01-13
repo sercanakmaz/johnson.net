@@ -51,6 +51,9 @@
 ```
 
 #### Step 4 Add environment configuration files to your visual studio project
+
+![alt tag](https://raw.githubusercontent.com/srjohn/johnson.net/master/ReadMeAssets/solution-explorer-config.png)
+
 #### Step 5 Get your configuration data.
 
 ```csharp
