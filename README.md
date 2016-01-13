@@ -81,11 +81,22 @@ var yourDouble = JohnsonManager.Convert.To<double>("123.12");
 3. A simple ORM
 ------------------------------------------------------------
 
+It's looks simple but in a optimum level, it has all you need to develop a enterprise application.
+
+By default JohnsonManager.Data uses "LocalSqlServer" connection string, but you can get a new instance from JohnsonNet.Operation.DataOperation class to use your own connection string.
+
 ```csharp
 class Product
 {
     public int ID { get; set; }
     public string Name { get; set; }
+}
+class MappedProduct
+{
+    [FieldMap("column_product_id")]
+    public int ProductID { get; set; }
+    [FieldMap("column_product_name")]
+    public string ProductName { get; set; }
 }
 
 JohnsonManager.Data.Execute<Product>("GetProduct", new ParamDictionary
@@ -93,3 +104,17 @@ JohnsonManager.Data.Execute<Product>("GetProduct", new ParamDictionary
     { "ID", 1 }
 });
 ```
+```csharp FieldMap ``` attribute can help you rename your database field.
+
+JohnsonManager.Data supports multiple resultsets from your database.
+
+```csharp
+var resulSets = JohnsonManager.Data.Execute<Product,MappedProduct>("GetProduct", new ParamDictionary
+{
+    { "ID", 1 }
+});
+
+var products = resultSets.Result1;
+var mappedProducts = resultSets.Result2;
+```
+
