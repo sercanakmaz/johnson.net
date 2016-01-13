@@ -192,8 +192,32 @@ This method allows you to prepare a dictionary list with your entity. You can us
 
 #### ToList extension method
 
-It can convert your IDataReader to a entity list.
+It can convert your IDataReader to a entity list with considering ```FieldMap``` attribute.
 
 ```csharp
 public static List<T> ToList<T>(this IDataReader reader)
+```
+
+#### GetFieldOrdinal extension method
+
+You can get columns ordinal in a ```IDataRecord```.
+
+```csharp
+public static int GetFieldOrdinal(this IDataRecord dr, string columnName)
+```
+
+#### ToConnectionStringSettings extension method
+
+You can get ConnectionStringSettings object from a IDbConnection
+
+```csharp
+public static ConnectionStringSettings ToConnectionStringSettings(this IDbConnection connection)
+```
+
+#### ToIDbConnection extension method
+
+You can get IDbConnection object from a ConnectionStringSettings
+
+```csharp
+public static IDbConnection ToIDbConnection(this ConnectionStringSettings setting)
 ```
