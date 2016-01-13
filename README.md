@@ -16,7 +16,7 @@
 ## 1. Environment Configuration
 ------------------------------------------------------------
 
-###### Step 1 Add config section to your web.config/appconfig
+##### Step 1: Add config section to your web.config/appconfig
 
 ```xml
 <configSections>
@@ -24,7 +24,7 @@
 </configSections>
 ```
 
-##### Step 2 Add Environment Rule 
+##### Step 2: Add Environment Rule 
 
 ###### ComputerName
 
@@ -50,11 +50,11 @@
   </environmentConfig>
 ```
 
-#### Step 4 Add environment configuration files to your visual studio project
+#### Step 4: Add environment configuration files to your visual studio project
 
 ![alt tag](https://raw.githubusercontent.com/srjohn/johnson.net/master/ReadMeAssets/solution-explorer-config.png)
 
-#### Step 5 Get your configuration data.
+#### Step 5: Get your configuration data.
 
 ```csharp
     var connectionString = JohnsonManager.Config.Current.GetConnectionString("LocalSqlServer");
@@ -90,6 +90,8 @@ var yourDouble = JohnsonManager.Convert.To<double>("123.12");
 It's looks simple but in a optimum level, it has all you need to develop a enterprise application.
 
 By default JohnsonManager.Data uses "LocalSqlServer" connection string, but you can get a new instance from JohnsonNet.Operation.DataOperation class to use your own connection string.
+
+### JohnsonNet.Operation.DataOperation class
 
 #### Execute Method
 
@@ -128,6 +130,32 @@ var mappedProducts = resultSets.Result2;
 
 #### ExecuteReader method
 
+ExecuteReader method has 3 argument, first two procedure name and parameters. Third is a Action<IDataReader>, this allows you to get a your results with IDataRedeader.
+
+I'm using this library in all my projects. And i used Execute and other methods several times. But used ExecuteReader method once. In that case; i had a stored procedure with dymamic pivot table. Of couse didn't know how many columns coming from database. You can see my solution to this problem. ExecuteReader saved my life for this scenario.
+
+```csharp
+public class SaleResult : Dictionary<string,object>
+{
+
+}
+    
+SebDataRepository.Cms.ExecuteReader("Report.Sale", parameters, (reader) =>
+{
+    while (reader.Read())
+    {
+        Entities.Report.SaleResult row = new Entities.Report.SaleResult();
+        for (int i = 0; i < reader.FieldCount; i++)
+        {
+            row.Add(reader.GetName(i), reader[i]);
+        }
+        result.Add(row);
+    }
+});
+```
+
+Of course you can use whatever you like, basic sample is below.
+
 ```csharp
 JohnsonManager.Data.ExecuteReader("dbo.GetProduct", new ParamDictionary
 {
@@ -139,4 +167,33 @@ JohnsonManager.Data.ExecuteReader("dbo.GetProduct", new ParamDictionary
 
     }
 });
+```
+#### ExecuteBulk method
+
+SQL Server Managament Studio has a keyword named "GO", this keyword allows you to run several scripts in one file. Sometimes we need this on C#, this method helps you to that.
+
+```csharp
+JohnsonManager.Data.ExecuteBulk("ALTER TABLE dbo.Product ADD Price INT\r\nGO\r\nALTER TABLE dbo.Product ADD Wat INT")
+```
+
+#### ExecuteNonQuery method
+
+You know this allready.
+
+### JohnsonNet.Data.Extensions class
+
+#### ToParamDictionary extension method
+
+```csharp
+public static ParamDictionary ToParamDictionary(this object obj)
+```
+
+This method allows you to prepare a dictionary list with your entity. You can use this dictionary to send data to your database. And of cours its considers Ignore and FieldMap attributes. If a property has a Ignore attribute, it will not show up in the dictionary. Or if a property has a FieldMap attribute it will show up with mapped name.
+
+#### ToList extension method
+
+It can convert your IDataReader to a entity list.
+
+```csharp
+public static List<T> ToList<T>(this IDataReader reader)
 ```
