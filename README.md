@@ -1,7 +1,7 @@
-johnson.net - a simple .net project helper
+# johnson.net - a simple .net project helper
 ===========
 
-Features
+## Features
 --------
 1. Environment configuration operations
 2. Convert operations
@@ -13,10 +13,10 @@ Features
 8. Reflection operations
 
 
-1. Environment Configuration
+## 1. Environment Configuration
 ------------------------------------------------------------
 
-1 Add config section to your web.config/appconfig
+###### Step 1 Add config section to your web.config/appconfig
 
 ```xml
 <configSections>
@@ -24,7 +24,9 @@ Features
 </configSections>
 ```
 
-2 Add environment rule (ComputerName)
+##### Step 2 Add Environment Rule 
+
+###### ComputerName
 
 ```xml
 <environmentConfig live="~/Config/Live.config" local="~/Config/Local.config" test="~/Config/Test.config" provider="JohnsonNet.Config.ConfigurationFileProvider">
@@ -36,7 +38,8 @@ Features
 </environmentConfig>
 ```
 
-3 Add environment rule (RequestHost)
+###### RequestHost
+
 ```xml
   <environmentConfig live="~/Config/Live.config" local="~/Config/Local.config" test="~/Config/Test.config" provider="JohnsonNet.Config.ConfigurationFileProvider">
     <rules type="Request">
@@ -47,8 +50,8 @@ Features
   </environmentConfig>
 ```
 
-4 Add environment configuration files to your visual studio project
-5 Get your configuration data.
+#### Step 4 Add environment configuration files to your visual studio project
+#### Step 5 Get your configuration data.
 
 ```csharp
     var connectionString = JohnsonManager.Config.Current.GetConnectionString("LocalSqlServer");
@@ -56,20 +59,20 @@ Features
     var applicationGuid = JohnsonManager.Config.Current.GetSetting<Guid>("Facebook-Guid");
     var service = JohnsonManager.Config.Current.GetCommunicationObject<IYourServiceChannel>();
 ```
-Also 
+#### Also 
 
-1 You can get your current environment.
+##### You can get your current environment.
 ```csharp
 JohnsonManager.Config.CurrentEnvironment // Local,Test,PreProduction Live
 ```
-2 You can build your own ConfigurationProvider.
+##### You can build your own ConfigurationProvider.
 ```xml
   <environmentConfig provider="YourNameSpace.YourConfigurationProvider">
   
   </environmentConfig>
 ```
 
-2. Convert anything to anything
+## 2. Convert anything to anything
 ------------------------------------------------------------
 ```csharp
 var nullableGuid = JohnsonManager.Convert.To<Guid?>("12312sfd");
@@ -78,8 +81,14 @@ var yourDecimal = JohnsonManager.Convert.To(typeof(decimal), "123.12");
 var yourDouble = JohnsonManager.Convert.To<double>("123.12");
 ```
 
-3. A simple ORM
+## 3. A simple ORM
 ------------------------------------------------------------
+
+It's looks simple but in a optimum level, it has all you need to develop a enterprise application.
+
+By default JohnsonManager.Data uses "LocalSqlServer" connection string, but you can get a new instance from JohnsonNet.Operation.DataOperation class to use your own connection string.
+
+#### Execute Method
 
 ```csharp
 class Product
@@ -87,9 +96,44 @@ class Product
     public int ID { get; set; }
     public string Name { get; set; }
 }
+class MappedProduct
+{
+    [FieldMap("column_product_id")]
+    public int ProductID { get; set; }
+    [FieldMap("column_product_name")]
+    public string ProductName { get; set; }
+}
 
 JohnsonManager.Data.Execute<Product>("GetProduct", new ParamDictionary
 {
     { "ID", 1 }
+});
+```
+```csharp FieldMap ``` attribute can help you rename your database field.
+
+JohnsonManager.Data supports multiple resultsets from your database.
+
+```csharp
+var resulSets = JohnsonManager.Data.Execute<Product,MappedProduct>("GetProduct", new ParamDictionary
+{
+    { "ID", 1 }
+});
+
+var products = resultSets.Result1;
+var mappedProducts = resultSets.Result2;
+```
+
+#### ExecuteReader method
+
+```csharp
+JohnsonManager.Data.ExecuteReader("dbo.GetProduct", new ParamDictionary
+{
+    { "ID", 1 }
+}, (reader) =>
+{
+    while (reader.Read())
+    {
+
+    }
 });
 ```
