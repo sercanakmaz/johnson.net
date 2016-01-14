@@ -10,8 +10,6 @@
 5. Log operations
 6. Mail operations
 7. Multithread operations
-8. Reflection operations
-
 
 ## 1. Environment Configuration
 ------------------------------------------------------------
@@ -270,14 +268,128 @@ public string GetResourceStream(Assembly assembly, string resourceName)
 
 ### 5. JohnsonNet.Operation.LogOperation class
 
-JohnsonNet has a loggind mechanism too. I have to admit, this is amateur. I didn't have time to enhance this. But it will do the job.
+JohnsonNet has a logging mechanism too. I have to admit, this is amateur. I didn't have time to enhance this. But it will do the job.
 
 #### Configuring
 
 ##### Step 1: Add config section to your web.config/appconfig
 
 ```xml
-<configSections>
-    <section name="environmentConfig" type="JohnsonNet.Config.EnvironmentConfig,JohnsonNet"/>
-</configSections>
+<appSettings>
+    <add key="LogProjectName" value="YourProjectName" />
+    <add key="LogType" value="SaveDatabase;SendMail" />
+    
+    <add key="LogSmtpUser" value="" />
+    <add key="LogSmtpPass" value="" />
+    <add key="LogSmtpPort" value="" />
+    <add key="LogSmtpServer" value="" />
+    <add key="LogSmtpEnableSSL" value="True" />
+    
+</appSettings>
+```
+
+##### Step 2: Define your SaveDatabaseAction.
+
+If your LogType has SaveDatabase, johnsonnet will run this method with your parameters. You can specify this method in global application start, in windows start of main method.
+
+```csharp
+JohnsonManager.Logger.SaveDatabaseAction = (DateTime date, string exception, string extra, string project) =>
+{
+    JohnsonManager.Data.ExecuteNonQuery("System.SaveLog", new ParamDictionary
+    {
+        { "Date", date },
+        { "Exception", exception },
+        { "Extra", extra },
+        { "Project", project },
+    });
+};
+```
+
+#### Step 3: Using
+
+JohnsonManager.Logger.Log
+
+##### Log Method Usage
+
+This method has 9 overriding method. But it has 2 point of view.
+
+###### Point of View 1: Sending Exception class as Log.
+
+In this point of view, you can send ```Exception``` class as parameter. And send your parameters to cause exception as extra. Sample is below
+
+```csharp
+static void SaveProduct(Product product)
+{
+    try
+    {
+        ParamDictionary parameters = product.ToParamDictionary();
+        JohnsonManager.Data.ExecuteNonQuery("dbo.SaveProduct", parameters);
+    }
+    catch (Exception ex)
+    {
+        JohnsonManager.Logger.Log(ex, "ProductID: {0}, ProductName: {1}", product.ID, product.Name);
+    }
+}
+```
+
+###### Point of View 1: Sending object as log
+
+In this point of view, you can send your object as parameter. And send your parameters to cause exception as extra. Sample is below
+
+```csharp
+static void SaveProduct(Product product)
+{
+    try
+    {
+        ParamDictionary parameters = product.ToParamDictionary();
+        JohnsonManager.Data.ExecuteNonQuery("dbo.SaveProduct", parameters);
+    }
+    catch (Exception ex)
+    {
+        JohnsonManager.Logger.Log(product, "SaveProduct");
+    }
+}
+```
+
+
+### 6. JohnsonNet.Operation.MailOperation class
+
+JohnsonNet has a mail operation class
+
+Simply it allows you to send mail from your project.
+
+#### Configuring
+
+##### Step 1: Add config section to your web.config/appconfig
+
+```xml
+<appSettings>
+    <add key="SmtpUser" value="" />
+    <add key="SmtpPass" value="" />
+    <add key="SmtpPort" value="" />
+    <add key="SmtpServer" value="" />
+    <add key="SmtpEnableSSL" value="True" />
+</appSettings>
+```
+
+##### Step 2: Using
+
+It has cc, bcc, attachments parameters. If it receive an error during sending to mail. It will return to exception for your further use.
+
+```csharp
+Exception exception = JohnsonManager.Mail.Send("info@google.com", "Johnson Has Mail Provider", "Your Body");
+```
+
+### 7. JohnsonNet.Operation.MultiThreadOperation
+
+You can run asynchronous methods and rename your thread for debugging.
+
+```csharp
+JohnsonManager.MultiThread.ExecuteAsync(() =>
+{
+    for (int i = 0; i < int.MaxValue; i++)
+    {
+
+    }
+}, name: "BigLoop");
 ```
