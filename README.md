@@ -16,6 +16,8 @@
 ## 1. Environment Configuration
 ------------------------------------------------------------
 
+#### Installing
+
 ##### Step 1: Add config section to your web.config/appconfig
 
 ```xml
@@ -50,11 +52,11 @@
   </environmentConfig>
 ```
 
-#### Step 4: Add environment configuration files to your visual studio project
+##### Step 4: Add environment configuration files to your visual studio project
 
 ![alt tag](https://raw.githubusercontent.com/srjohn/johnson.net/master/ReadMeAssets/solution-explorer-config.png)
 
-#### Step 5: Get your configuration data.
+##### Step 5: Get your configuration data.
 
 ```csharp
     var connectionString = JohnsonManager.Config.Current.GetConnectionString("LocalSqlServer");
@@ -95,6 +97,8 @@ By default JohnsonManager.Data uses "LocalSqlServer" connection string, but you 
 
 #### Execute Method
 
+Execute method has 2 argument, procedure name and parameters. And it will convert database results to a entity list.
+
 ```csharp
 class Product
 {
@@ -132,7 +136,7 @@ var mappedProducts = resultSets.Result2;
 
 ExecuteReader method has 3 argument, first two procedure name and parameters. Third is a Action<IDataReader>, this allows you to get a your results with IDataRedeader.
 
-I'm using this library in all my projects. And i used Execute and other methods several times. But used ExecuteReader method once. In that case; i had a stored procedure with dymamic pivot table. Of couse didn't know how many columns coming from database. You can see my solution to this problem. ExecuteReader saved my life for this scenario.
+I'm using this library in all my projects. And i used Execute and other method a lot. But used ExecuteReader method once. In that case; i had a stored procedure with dymamic pivot table. Of couse didn't know how many columns coming from database. You can see my solution to this problem. ExecuteReader saved my life for this scenario.
 
 ```csharp
 public class SaleResult : Dictionary<string,object>
@@ -220,4 +224,60 @@ You can get IDbConnection object from a ConnectionStringSettings
 
 ```csharp
 public static IDbConnection ToIDbConnection(this ConnectionStringSettings setting)
+```
+
+### JohnsonNet.Operation.IOOperation class
+
+#### ToFriendlySizeString method
+
+It will return byte count a friendly text. Like, 1 GB 121 MB
+
+```csharp
+public string ToFriendlySizeString(long bytes)
+```
+
+#### NextAvailableFilename method
+
+This method allows you to get next available filename in the folder. If a file exists with same time, method will add a suffix like "(1)".
+
+```csharp
+public string NextAvailableFilename(string path)
+```
+
+#### RemoveInvalidFileNameChars method
+
+It will remove invalid chars from your file name.
+
+```csharp
+public string RemoveInvalidFileNameChars(string path)
+```
+
+#### ToSEOFriendlyFileName method
+
+It will convert your filename to a SEO friendly status.
+
+```csharp
+public string ToSEOFriendlyFileName(string fileName)
+```
+
+#### GetResourceStream method
+
+This method allows you to get a method with string
+
+```csharp
+public string GetResourceStream(Assembly assembly, string resourceName)
+```
+
+### 5. JohnsonNet.Operation.LogOperation class
+
+JohnsonNet has a loggind mechanism too. I have to admit, this is amateur. I didn't have time to enhance this. But it will do the job.
+
+#### Configuring
+
+##### Step 1: Add config section to your web.config/appconfig
+
+```xml
+<configSections>
+    <section name="environmentConfig" type="JohnsonNet.Config.EnvironmentConfig,JohnsonNet"/>
+</configSections>
 ```
