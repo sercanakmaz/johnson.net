@@ -110,6 +110,9 @@ namespace JohnsonNet
         }
 
         private static DataOperation p_Data = null;
+        /// <summary>
+        /// By default JohnsonManager.Data uses "LocalSqlServer" connection string, but you can get a new instance from JohnsonNet.Operation.DataOperation class to use your own connection string.
+        /// </summary>
         public static DataOperation Data
         {
             get

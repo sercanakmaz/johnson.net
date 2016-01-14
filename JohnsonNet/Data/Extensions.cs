@@ -11,6 +11,11 @@ namespace JohnsonNet.Data
 {
     public static class Extensions
     {
+        /// <summary>
+        /// This method allows you to prepare a dictionary list with your entity. You can use this dictionary to send data to your database. And of cours its considers Ignore and FieldMap attributes. If a property has a Ignore attribute, it will not show up in the dictionary. Or if a property has a FieldMap attribute it will show up with mapped name.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static ParamDictionary ToParamDictionary(this object obj)
         {
             if (obj == null) return null;
@@ -34,6 +39,12 @@ namespace JohnsonNet.Data
 
             return parameters;
         }
+        /// <summary>
+        /// It can convert your IDataReader to a entity list with considering FieldMap attribute.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="reader"></param>
+        /// <returns></returns>
         public static List<T> ToList<T>(this IDataReader reader)
         {
             var result = new List<T>();
@@ -73,6 +84,12 @@ namespace JohnsonNet.Data
 
             return result;
         }
+        /// <summary>
+        /// You can get columns ordinal in a IDataRecord.
+        /// </summary>
+        /// <param name="dr"></param>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
         public static int GetFieldOrdinal(this IDataRecord dr, string columnName)
         {
             for (int i = 0; i < dr.FieldCount; i++)
@@ -82,6 +99,11 @@ namespace JohnsonNet.Data
             }
             return -1;
         }
+        /// <summary>
+        /// You can get ConnectionStringSettings object from a IDbConnection
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <returns></returns>
         public static ConnectionStringSettings ToConnectionStringSettings(this IDbConnection connection)
         {
             if (connection == null) throw new ArgumentNullException("connection");
@@ -99,6 +121,11 @@ namespace JohnsonNet.Data
 
             return new ConnectionStringSettings { ConnectionString = connection.ConnectionString, ProviderName = provider };
         }
+        /// <summary>
+        /// You can get IDbConnection object from a ConnectionStringSettings
+        /// </summary>
+        /// <param name="setting"></param>
+        /// <returns></returns>
         public static IDbConnection ToIDbConnection(this ConnectionStringSettings setting)
         {
             var factory = DbProviderFactories.GetFactory(setting.ProviderName);

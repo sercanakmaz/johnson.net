@@ -146,10 +146,5 @@ namespace JohnsonNet.Operation
             }
             catch { return false; }
         }
-
-        private class ElasticSearchResult
-        {
-            public bool Created { get; set; }
-        }
     }
 }

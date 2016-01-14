@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace JohnsonNet.Operation
 {
@@ -12,6 +13,11 @@ namespace JohnsonNet.Operation
         private static readonly List<string> units = new List<string>(5) { "B", "KB", "MB", "GB", "TB" }; // Not going further. Anything beyond MB is probably overkill anyway.
         private static string numberPattern = " ({0})";
 
+        /// <summary>
+        /// It will return byte count a friendly text. Like, 1 GB 121 MB
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
         public string ToFriendlySizeString(long bytes)
         {
             var somethingMoreFriendly = TryForTheNextUnit(bytes, units[0]);
@@ -33,6 +39,11 @@ namespace JohnsonNet.Operation
             return new Tuple<double, string>(size, unit);
         }
 
+        /// <summary>
+        /// This method allows you to get next available filename in the folder. If a file exists with same time, method will add a suffix like "(1)".
+        /// </summary>
+        /// <param name="path">File path</param>
+        /// <returns></returns>
         public string NextAvailableFilename(string path)
         {
             // Short-cut if already available
@@ -76,7 +87,12 @@ namespace JohnsonNet.Operation
             return string.Format(pattern, max);
         }
 
-        public string ToFileName(string path)
+        /// <summary>
+        /// It will remove invalid chars from your file name.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public string RemoveInvalidFileNameChars(string path)
         {
             foreach (string c in Path.GetInvalidFileNameChars().Select(p => p.ToString()))
                 path = path.Replace(c, string.Empty);
@@ -84,7 +100,47 @@ namespace JohnsonNet.Operation
             return path;
         }
 
-        public static string GetResourceStream(Assembly assembly, string resourceName)
+        /// <summary>
+        /// It will convert your filename to a SEO friendly status.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public string ToSEOFriendlyFileName(string fileName)
+        {
+            fileName = fileName.ToLower()
+                .Replace(" ", "-")
+                .Replace("_", "-")
+                .Replace("+", string.Empty)
+                .Replace("ğ", "g")
+                .Replace("ü", "u")
+                .Replace("ş", "s")
+                .Replace("ı", "i")
+                .Replace("ö", "o")
+                .Replace("ç", "c")
+                .Replace("[", string.Empty)
+                .Replace("]", string.Empty)
+                .Replace("(", string.Empty)
+                .Replace(")", string.Empty);
+
+            while (fileName.Contains("--"))
+            {
+                fileName = fileName.Replace("--", "-");
+            }
+
+            fileName = RemoveInvalidFileNameChars(fileName);
+
+            Regex re = new Regex("[;\\\\/:*?\"<>|&']");
+
+            return re.Replace(fileName, string.Empty);
+        }
+
+        /// <summary>
+        /// This method allows you to get a method with string
+        /// </summary>
+        /// <param name="assembly">Resource's assembly</param>
+        /// <param name="resourceName">Resource Name</param>
+        /// <returns></returns>
+        public string GetResourceStream(Assembly assembly, string resourceName)
         {
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             using (StreamReader reader = new StreamReader(stream))

@@ -24,6 +24,10 @@ namespace JohnsonNet.Operation
 
         }
 
+        /// <summary>
+        /// SQL Server Managament Studio has a keyword named "GO", this keyword allows you to run several scripts in one file. Sometimes we need this on C#, this method helps you to that.
+        /// </summary>
+        /// <param name="query"></param>
         public void ExecuteBulk(string query)
         {
             string[] queries = query.Split(new[] { "\r\nGO", "\nGO", "\rGO", " GO", "\tGO", "GO\r\n", "GO\n", "GO\r", "GO ", "GO\t" }, StringSplitOptions.RemoveEmptyEntries);
@@ -55,7 +59,13 @@ namespace JohnsonNet.Operation
                 }
             }
         }
-
+        
+        /// <summary>
+        /// You know this allready.
+        /// </summary>
+        /// <param name="proc"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public virtual int ExecuteNonQuery(string proc, ParamDictionary parameters)
         {
             using (var conn = CurrentConnectionString.ToIDbConnection())
@@ -92,6 +102,12 @@ namespace JohnsonNet.Operation
                 return result;
             }
         }
+        /// <summary>
+        /// ExecuteReader method has 3 argument, first two procedure name and parameters. Third is a IDataReader Action, this allows you to get a your results with IDataRedeader.
+        /// </summary>
+        /// <param name="proc"></param>
+        /// <param name="parameters"></param>
+        /// <param name="use"></param>
         public virtual void ExecuteReader(string proc, ParamDictionary parameters, Action<IDataReader> use)
         {
             using (var conn = CurrentConnectionString.ToIDbConnection())
@@ -130,6 +146,13 @@ namespace JohnsonNet.Operation
         }
 
         #region Execute Methods
+        /// <summary>
+        /// This method allows you to database results to a entity list.
+        /// </summary>
+        /// <typeparam name="T">entity</typeparam>
+        /// <param name="proc">Procedure Name</param>
+        /// <param name="parameters">Procedure Parameters</param>
+        /// <returns></returns>
         public virtual List<T> Execute<T>(string proc, ParamDictionary parameters = null)
         {
             List<T> result = null;
@@ -138,6 +161,14 @@ namespace JohnsonNet.Operation
 
             return result;
         }
+        /// <summary>
+        /// This method allows you to get 2 resultsets from your database and it converts to a entity list.
+        /// </summary>
+        /// <typeparam name="T">ResultSet1</typeparam>
+        /// <typeparam name="T1">ResulSet2</typeparam>
+        /// <param name="proc">Procedure Name</param>
+        /// <param name="parameters">Procedure Parameters</param>
+        /// <returns></returns>
         public virtual ResultSet<T, T1> Execute<T, T1>(string proc, ParamDictionary parameters = null)
         {
             var result = new ResultSet<T, T1>();

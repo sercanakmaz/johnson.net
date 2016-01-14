@@ -16,16 +16,30 @@ namespace Test.Console
     {
         static void Main(string[] args)
         {
-            using (var service = JohnsonManager.Config.Current.GetCommunicationObject<BrisaTypeService.TypesSoapChannel>())
+            JohnsonManager.MultiThread.ExecuteAsync(() =>
             {
-                var responseCity = service.GetCities(new BrisaTypeService.GetCitiesRequest(new BrisaTypeService.GetCitiesRequestBody
+                for (int i = 0; i < int.MaxValue; i++)
                 {
-                    xmlCity = "<GetCities><CountryId>a30ca95a-a22b-e111-b25c-005056b853b9</CountryId></GetCities>"
-                }));
 
-                System.Console.WriteLine(responseCity.Body);
-            }
-            System.Console.ReadKey();
+                }
+            }, name: "BigLoop");
         }
+        static void SaveProduct(Product product)
+        {
+            try
+            {
+                ParamDictionary parameters = product.ToParamDictionary();
+                JohnsonManager.Data.ExecuteNonQuery("dbo.SaveProduct", parameters);
+            }
+            catch (Exception ex)
+            {
+                JohnsonManager.Logger.Log(product, "SaveProduct");
+            }
+        }
+    }
+    class Product
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
     }
 }
