@@ -4,6 +4,7 @@ using JohnsonNet.Queue;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -16,13 +17,7 @@ namespace Test.Console
     {
         static void Main(string[] args)
         {
-            JohnsonManager.MultiThread.ExecuteAsync(() =>
-            {
-                for (int i = 0; i < int.MaxValue; i++)
-                {
-
-                }
-            }, name: "BigLoop");
+            System.Console.WriteLine("wqdwqd");
         }
         static void SaveProduct(Product product)
         {

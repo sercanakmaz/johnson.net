@@ -59,21 +59,21 @@ namespace JohnsonNet.Operation
                     case RuleType.Request:
                         {
                             var req = HttpContext.Current.Request;
+                           
+                            foreach (Rule rule in EnvironmentConfig.Rules)
+                            {
+                                if (req.Url.Host.Equals(rule.Param, StringComparison.CurrentCultureIgnoreCase))
+                                {
+                                    return rule.Environment;
+                                }
+                            }
 
                             if (req.IsLocal)
                             {
                                 return EnvironmentType.Local;
                             }
-                            else
-                            {
-                                foreach (Rule rule in EnvironmentConfig.Rules)
-                                {
-                                    if (req.Url.Host.Equals(rule.Param, StringComparison.CurrentCultureIgnoreCase))
-                                    {
-                                        return rule.Environment;
-                                    }
-                                }
-                            }
+
+                            return EnvironmentType.Unknown;
                         }
                         break;
                     case RuleType.ComputerName:

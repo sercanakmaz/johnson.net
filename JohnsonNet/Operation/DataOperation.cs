@@ -1,15 +1,18 @@
 ﻿using JohnsonNet.Data;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace JohnsonNet.Operation
 {
     public class DataOperation
     {
         public ConnectionStringSettings CurrentConnectionString;
+        public int CommandTimeout { get; set; }
 
         public DataOperation()
             : this(null)
@@ -44,6 +47,7 @@ namespace JohnsonNet.Operation
                         {
                             command.CommandText = q;
                             command.CommandType = CommandType.Text;
+                            command.CommandTimeout = this.CommandTimeout;
 
                             command.ExecuteNonQuery();
                         }
@@ -59,7 +63,7 @@ namespace JohnsonNet.Operation
                 }
             }
         }
-        
+
         /// <summary>
         /// You know this allready.
         /// </summary>
@@ -68,6 +72,8 @@ namespace JohnsonNet.Operation
         /// <returns></returns>
         public virtual int ExecuteNonQuery(string proc, ParamDictionary parameters)
         {
+            DateTime dateStart = DateTime.Now;
+
             using (var conn = CurrentConnectionString.ToIDbConnection())
             using (var command = conn.CreateCommand())
             {
@@ -79,6 +85,7 @@ namespace JohnsonNet.Operation
 
                     command.CommandText = proc;
                     command.CommandType = CommandType.StoredProcedure;
+                    command.CommandTimeout = this.CommandTimeout;
 
                     if (parameters != null)
                     {
@@ -87,6 +94,8 @@ namespace JohnsonNet.Operation
                             command.Parameters.Add(new SqlParameter(item.Key, item.Value));
                         }
                     }
+
+                    this.WriteProfile(proc, parameters, dateStart);
 
                     result = command.ExecuteNonQuery();
                 }
@@ -110,15 +119,17 @@ namespace JohnsonNet.Operation
         /// <param name="use"></param>
         public virtual void ExecuteReader(string proc, ParamDictionary parameters, Action<IDataReader> use)
         {
+            DateTime dateStart = DateTime.Now;
+
             using (var conn = CurrentConnectionString.ToIDbConnection())
             using (var command = conn.CreateCommand())
             {
                 conn.Open();
                 try
                 {
-
                     command.CommandText = proc;
                     command.CommandType = CommandType.StoredProcedure;
+                    command.CommandTimeout = this.CommandTimeout;
 
                     if (parameters != null)
                     {
@@ -143,6 +154,8 @@ namespace JohnsonNet.Operation
                     conn.Close();
                 }
             }
+
+            this.WriteProfile(proc, parameters, dateStart);
         }
 
         #region Execute Methods
@@ -256,5 +269,27 @@ namespace JohnsonNet.Operation
             return result;
         }
         #endregion
+
+        private void WriteProfile(string proc, ParamDictionary parameters, DateTime dateStart)
+        {
+            bool writeExecuteLog = JohnsonManager.Config.Current.GetSetting<bool>("JonhsonNet:Profile");
+
+            if (writeExecuteLog)
+            {
+                string executeLog = this.GetExecuteLog(proc, parameters);
+                TimeSpan elapsedLog = DateTime.Now - dateStart;
+
+                Debug.WriteLine(executeLog);
+                Debug.WriteLine("Elapsed: {0}", elapsedLog.TotalMilliseconds);
+            }
+        }
+        private string GetExecuteLog(string proc, ParamDictionary parameters = null)
+        {
+            if (parameters == null) parameters = new ParamDictionary();
+
+            var parametersFiltered = parameters.Where(p => !string.IsNullOrEmpty(JohnsonManager.Convert.To<string>(p.Value)));
+
+            return string.Format("EXEC {0} {1}", proc, string.Join(",", parameters.Select(p => string.Format("@{0} = '{1}'", p.Key, p.Value))));
+        }
     }
 }
