@@ -17,24 +17,11 @@ namespace Test.Console
     {
         static void Main(string[] args)
         {
-            System.Console.WriteLine("wqdwqd");
+            var logger = log4net.LogManager.GetLogger("DefaultLogger");
+
+            logger.Fatal("Deneme Log");
+
+            System.Console.ReadKey();
         }
-        static void SaveProduct(Product product)
-        {
-            try
-            {
-                ParamDictionary parameters = product.ToParamDictionary();
-                JohnsonManager.Data.ExecuteNonQuery("dbo.SaveProduct", parameters);
-            }
-            catch (Exception ex)
-            {
-                JohnsonManager.Logger.Log(product, "SaveProduct");
-            }
-        }
-    }
-    class Product
-    {
-        public int ID { get; set; }
-        public string Name { get; set; }
     }
 }
