@@ -1,5 +1,6 @@
 ﻿using JohnsonNet;
 using JohnsonNet.Data;
+using JohnsonNet.log4net.Appender;
 using JohnsonNet.Queue;
 using Newtonsoft.Json;
 using System;
@@ -19,9 +20,27 @@ namespace Test.Console
         {
             var logger = log4net.LogManager.GetLogger("DefaultLogger");
 
-            logger.Fatal("Deneme Log");
+            logger.Info(new SaveInput
+            {
+                 ID = 0,
+                 Name = "qdwwqd"
+            });
 
             System.Console.ReadKey();
+        }
+    }
+    class SaveInput
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+    }
+    class SaveInputHandler : IJohnsonDataCustomTypeHandler
+    {
+        public bool Handle(object input)
+        {
+            SaveInput typedInput = input as SaveInput;
+
+            return true;
         }
     }
 }

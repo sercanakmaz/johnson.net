@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>JohnsonNet.log4net</id>
+    <version>1.0.0.1</version>
+    <authors>srjohn</authors>
+    <owners>srjohn</owners>
+    <licenseUrl>https://github.com/srjohn/johnson.net</licenseUrl>
+    <projectUrl>https://github.com/srjohn/johnson.net</projectUrl>
+    <iconUrl>https://www.nuget.org/Content/Images/packageDefaultIcon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>.NET Helper Libraries</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2014 srjohn</copyright>
+    <tags></tags>
+    <dependencies>
+      <dependency id="JohnsonNet" version="1.0.2.99" />
+      <dependency id="log4net" version="2.0.5" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\JohnsonNet.log4net\bin\Release\JohnsonNet.log4net.dll" target="lib\net40" />
+  </files>
+</package>

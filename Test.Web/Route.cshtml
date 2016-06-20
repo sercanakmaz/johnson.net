@@ -1,17 +1,5 @@
 ﻿@{
-    string code = this.RequestValue("code");
+    var logger = log4net.LogManager.GetLogger("DefaultLogger");
 
-    if (string.IsNullOrEmpty(code))
-    {
-        
-    }
+    logger.Info("Deneme Log");
 }
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
-<body>a
-
-</body>
-</html>
