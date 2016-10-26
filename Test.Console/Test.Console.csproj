@@ -87,10 +87,6 @@
       <Project>{d635f3c1-bae6-461a-9253-6ab59468de4f}</Project>
       <Name>JohnsonNet.log4net</Name>
     </ProjectReference>
-    <ProjectReference Include="..\JohnsonNet.Queue\JohnsonNet.Queue.csproj">
-      <Project>{4b61af98-149f-4bc7-b4d9-fc8534e9f720}</Project>
-      <Name>JohnsonNet.Queue</Name>
-    </ProjectReference>
     <ProjectReference Include="..\JohnsonNet\JohnsonNet.csproj">
       <Project>{2013303a-6c43-4e92-b9e0-e243e3f05ec0}</Project>
       <Name>JohnsonNet</Name>
