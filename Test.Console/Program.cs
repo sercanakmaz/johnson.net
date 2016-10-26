@@ -25,7 +25,7 @@ namespace Test.Console
                  Name = "qdwwqd"
             });
 
-            System.Console.ReadKey();
+            System.Console.ReadLine();
         }
     }
     class SaveInput
