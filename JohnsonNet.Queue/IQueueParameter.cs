@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace JohnsonNet.Integration
+namespace JohnsonNet.Queue
 {
-    public class Class1
+    public interface IQueueParameter
     {
+        bool DeQueue();
     }
 }

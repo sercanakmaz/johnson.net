@@ -1,6 +1,7 @@
 ﻿using JohnsonNet;
 using JohnsonNet.Data;
 using JohnsonNet.log4net.Appender;
+using JohnsonNet.Queue;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace Test.Console
                  Name = "qdwwqd"
             });
 
-            System.Console.ReadLine();
+            System.Console.ReadKey();
         }
     }
     class SaveInput

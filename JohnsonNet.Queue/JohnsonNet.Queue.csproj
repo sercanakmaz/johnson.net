@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2013303A-6C43-4E92-B9E0-E243E3F05EC0}</ProjectGuid>
+    <ProjectGuid>{4B61AF98-149F-4BC7-B4D9-FC8534E9F720}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JohnsonNet</RootNamespace>
-    <AssemblyName>JohnsonNet</AssemblyName>
+    <RootNamespace>JohnsonNet.Queue</RootNamespace>
+    <AssemblyName>JohnsonNet.Queue</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -32,16 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,49 +47,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\CustomClientChannel.cs" />
-    <Compile Include="Config\Elements\EnvironmentConfig.cs" />
-    <Compile Include="Config\Elements\EnvironmentType.cs" />
-    <Compile Include="Config\Elements\Rule.cs" />
-    <Compile Include="Config\Elements\Rules.cs" />
-    <Compile Include="Config\Elements\RuleType.cs" />
-    <Compile Include="Config\Providers\ConfigurationFileProvider.cs" />
-    <Compile Include="Config\Providers\IProvider.cs" />
-    <Compile Include="Data\IgnoreAttribute.cs" />
-    <Compile Include="Operation\CacheOperation.cs" />
-    <Compile Include="Operation\ConfigOperation.cs" />
-    <Compile Include="Operation\ConvertOperation.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Operation\DataOperation.cs" />
-    <Compile Include="Data\Extensions.cs" />
-    <Compile Include="Data\FieldMapAttribute.cs" />
-    <Compile Include="Data\Linq\Extensions.cs" />
-    <Compile Include="Data\ParamDictionary.cs" />
-    <Compile Include="Data\ResultSet.cs" />
-    <Compile Include="Drawing\Captcha.cs" />
-    <Compile Include="Drawing\Extensions.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="Operation\IOOperation.cs" />
-    <Compile Include="Operation\LogOperation.cs" />
-    <Compile Include="Operation\MailOperation.cs" />
-    <Compile Include="Operation\MultiThreadOperation.cs" />
-    <Compile Include="Operation\ReflectionOperation.cs" />
+    <Compile Include="IJohnsonQueueErrorProvider.cs" />
+    <Compile Include="IQueueParameter.cs" />
+    <Compile Include="JohnsonNetQueueConfig.cs" />
+    <Compile Include="IQueueEntity.cs" />
+    <Compile Include="IJohnsonQueueDataProvider.cs" />
+    <Compile Include="JohnsonQueueManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="JohnsonManager.cs" />
-    <Compile Include="Serialization\ISerializer.cs" />
-    <Compile Include="Serialization\JsonSerializer.cs" />
-    <Compile Include="Serialization\LowercaseContractResolver.cs" />
-    <Compile Include="Serialization\TimeSpanConverter.cs" />
-    <Compile Include="Serialization\UnixTimeStampConverter.cs" />
-    <Compile Include="Serialization\AbsoluteUriConverter.cs" />
-    <Compile Include="Serialization\XmlSerializer.cs" />
-    <Compile Include="Web\Extensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JohnsonNet\JohnsonNet.csproj">
+      <Project>{2013303a-6c43-4e92-b9e0-e243e3f05ec0}</Project>
+      <Name>JohnsonNet</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
