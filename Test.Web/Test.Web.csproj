@@ -68,15 +68,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\DataController.cs" />
-    <Compile Include="DataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Route.cshtml" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
