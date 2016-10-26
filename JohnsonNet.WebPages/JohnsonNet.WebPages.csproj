@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2013303A-6C43-4E92-B9E0-E243E3F05EC0}</ProjectGuid>
+    <ProjectGuid>{C84DC620-D777-40A6-9EBB-2C69417D73D6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JohnsonNet</RootNamespace>
-    <AssemblyName>JohnsonNet</AssemblyName>
+    <RootNamespace>JohnsonNet.WebPages</RootNamespace>
+    <AssemblyName>JohnsonNet.WebPages</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -32,16 +32,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.1.0.20105.408\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,49 +66,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\CustomClientChannel.cs" />
-    <Compile Include="Config\Elements\EnvironmentConfig.cs" />
-    <Compile Include="Config\Elements\EnvironmentType.cs" />
-    <Compile Include="Config\Elements\Rule.cs" />
-    <Compile Include="Config\Elements\Rules.cs" />
-    <Compile Include="Config\Elements\RuleType.cs" />
-    <Compile Include="Config\Providers\ConfigurationFileProvider.cs" />
-    <Compile Include="Config\Providers\IProvider.cs" />
-    <Compile Include="Data\IgnoreAttribute.cs" />
-    <Compile Include="Operation\CacheOperation.cs" />
-    <Compile Include="Operation\ConfigOperation.cs" />
-    <Compile Include="Operation\ConvertOperation.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Operation\DataOperation.cs" />
-    <Compile Include="Data\Extensions.cs" />
-    <Compile Include="Data\FieldMapAttribute.cs" />
-    <Compile Include="Data\Linq\Extensions.cs" />
-    <Compile Include="Data\ParamDictionary.cs" />
-    <Compile Include="Data\ResultSet.cs" />
-    <Compile Include="Drawing\Captcha.cs" />
-    <Compile Include="Drawing\Extensions.cs" />
+    <Compile Include="Controller.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Operation\IOOperation.cs" />
-    <Compile Include="Operation\LogOperation.cs" />
-    <Compile Include="Operation\MailOperation.cs" />
-    <Compile Include="Operation\MultiThreadOperation.cs" />
-    <Compile Include="Operation\ReflectionOperation.cs" />
+    <Compile Include="PostAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="JohnsonManager.cs" />
-    <Compile Include="Serialization\ISerializer.cs" />
-    <Compile Include="Serialization\JsonSerializer.cs" />
-    <Compile Include="Serialization\LowercaseContractResolver.cs" />
-    <Compile Include="Serialization\TimeSpanConverter.cs" />
-    <Compile Include="Serialization\UnixTimeStampConverter.cs" />
-    <Compile Include="Serialization\AbsoluteUriConverter.cs" />
-    <Compile Include="Serialization\XmlSerializer.cs" />
-    <Compile Include="Web\Extensions.cs" />
+    <Compile Include="RouteCollectionExtension.cs" />
+    <Compile Include="RoutePage.cs" />
+    <Compile Include="WebPagesRouteHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\JohnsonNet\JohnsonNet.csproj">
+      <Project>{2013303a-6c43-4e92-b9e0-e243e3f05ec0}</Project>
+      <Name>JohnsonNet</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
