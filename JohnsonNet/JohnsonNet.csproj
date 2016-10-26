@@ -73,7 +73,6 @@
     <Compile Include="Drawing\Extensions.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Operation\IOOperation.cs" />
-    <Compile Include="Operation\LogOperation.cs" />
     <Compile Include="Operation\MailOperation.cs" />
     <Compile Include="Operation\MultiThreadOperation.cs" />
     <Compile Include="Operation\ReflectionOperation.cs" />
