@@ -1,7 +1,6 @@
 ﻿using JohnsonNet;
 using JohnsonNet.Data;
 using JohnsonNet.log4net.Appender;
-using JohnsonNet.Queue;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,13 +18,7 @@ namespace Test.Console
         static void Main(string[] args)
         {
             var logger = log4net.LogManager.GetLogger("DefaultLogger");
-
-            logger.Info(new SaveInput
-            {
-                 ID = 0,
-                 Name = "qdwwqd"
-            });
-
+     
             System.Console.ReadKey();
         }
     }

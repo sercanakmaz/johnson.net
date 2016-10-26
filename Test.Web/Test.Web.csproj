@@ -68,15 +68,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\DataController.cs" />
-    <Compile Include="DataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Route.cshtml" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -93,14 +90,13 @@
       <Project>{d635f3c1-bae6-461a-9253-6ab59468de4f}</Project>
       <Name>JohnsonNet.log4net</Name>
     </ProjectReference>
-    <ProjectReference Include="..\JohnsonNet.WebAPI\JohnsonNet.WebAPI.csproj">
-      <Project>{adcd22c7-8beb-450f-8df1-e65f79186b41}</Project>
-      <Name>JohnsonNet.WebAPI</Name>
-    </ProjectReference>
     <ProjectReference Include="..\JohnsonNet\JohnsonNet.csproj">
       <Project>{2013303a-6c43-4e92-b9e0-e243e3f05ec0}</Project>
       <Name>JohnsonNet</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Base\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
