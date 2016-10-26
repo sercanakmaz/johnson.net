@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JohnsonNet", "JohnsonNet\JohnsonNet.csproj", "{2013303A-6C43-4E92-B9E0-E243E3F05EC0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JohnsonNet.WebPages", "JohnsonNet.WebPages\JohnsonNet.WebPages.csproj", "{C84DC620-D777-40A6-9EBB-2C69417D73D6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JohnsonNet.WebAPI", "JohnsonNet.WebAPI\JohnsonNet.WebAPI.csproj", "{ADCD22C7-8BEB-450F-8DF1-E65F79186B41}"
 EndProject
@@ -34,10 +32,6 @@ Global
 		{2013303A-6C43-4E92-B9E0-E243E3F05EC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2013303A-6C43-4E92-B9E0-E243E3F05EC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2013303A-6C43-4E92-B9E0-E243E3F05EC0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C84DC620-D777-40A6-9EBB-2C69417D73D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C84DC620-D777-40A6-9EBB-2C69417D73D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C84DC620-D777-40A6-9EBB-2C69417D73D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C84DC620-D777-40A6-9EBB-2C69417D73D6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ADCD22C7-8BEB-450F-8DF1-E65F79186B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ADCD22C7-8BEB-450F-8DF1-E65F79186B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADCD22C7-8BEB-450F-8DF1-E65F79186B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
