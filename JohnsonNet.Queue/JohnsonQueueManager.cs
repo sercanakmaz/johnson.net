@@ -80,7 +80,7 @@ namespace System
                 catch (Exception ex)
                 {
                     dequeueResult = false;
-                    // TODO: log4net should be added. JohnsonManager.Logger.Log(ex);
+                    JohnsonManager.Logger.Log(ex);
                 }
 
                 if (!dequeueResult)
@@ -101,7 +101,7 @@ namespace System
             catch (Exception ex)
             {
                 Add(input);
-                // TODO: log4net should be added. JohnsonManager.Logger.Log(ex);
+                JohnsonManager.Logger.Log(ex);
             }
         }
         public static void DeQueuePeriodic()
@@ -123,7 +123,7 @@ namespace System
                     }
                     catch (Exception ex)
                     {
-                        // TODO: log4net should be added. JohnsonManager.Logger.Log(ex, "DeQueuePeriodic");
+                        JohnsonManager.Logger.Log(ex, "DeQueuePeriodic");
                     }
 
                     Thread.Sleep(TimeSpan.FromMilliseconds(500));
