@@ -61,22 +61,6 @@ namespace JohnsonNet
             }
         }
 
-        private static LogOperation p_Logger = null;
-        public static LogOperation Logger
-        {
-            get
-            {
-                if (p_Logger == null)
-                    p_Logger = new LogOperation();
-
-                return p_Logger;
-            }
-            set
-            {
-                p_Logger = value;
-            }
-        }
-
         private static MailOperation p_Mail = null;
         public static MailOperation Mail
         {
